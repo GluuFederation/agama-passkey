@@ -1,0 +1,50 @@
+//Sends a notification to the super gluu device the user has registered (or provides an
+//option to scan a QR code instead). It returns a positive value if the operation was successful
+//(user tapped "approve"), or else a negative value; this includes when the user decides 
+//to use a different credential to authenticate. 
+//The identity of the user to authenticate is provided in userData input param 
+
+Flow io.jans.agamapasskey.authenticator.super_gluu
+    Basepath "authn/sg"
+    Configs conf
+    Inputs userData withEscape
+        
+inum = userData.inum
+sgCrap = Call io.jans.agamapasskey.SGValidator#new
+qrRequest = Call sgCrap QRRequest "authenticate"
+
+Log "@d Sending mobile notification to user's registered Super Gluu devices"
+realCrap = Call io.jans.agamapasskey.notify.SGNotificationsUtil#getInstance
+
+| E = Call realCrap send inum sgCrap.appId qrRequest
+When E is not null
+    Log "@e " E
+    E = null
+
+//Nullify realCrap to avoid its serialization
+realCrap = null
+timeout = conf.timeout
+
+//Show the "we sent you a notification" page even if there were errors
+obj = { timeout: timeout, escape: withEscape }
+data = RRF "notification.ftlh" obj
+
+When data.skipped is ""     //user wants a different thing
+    Finish false
+    
+When data."scan-QR" is ""    
+
+    //Show page for QR code scanning
+    obj = { request: qrRequest, timeout: timeout, escape: withEscape }
+    data = RRF "code-scan.ftlh" obj
+    
+    When data.skipped is ""
+        Finish false
+
+error = Call sgCrap validateDevice inum
+
+When error is not null
+    obj = { success: false, error: error }
+    Finish obj
+
+Finish true

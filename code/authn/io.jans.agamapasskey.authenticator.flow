@@ -1,0 +1,41 @@
+//This flow launches specific authentication flows based on the user's MFA preference and
+//his already enrolled credentials. This data is passed in the input parameters
+//It returns a positive value when any authentication flow finished successfully, or a 
+//negative value if there were more than 5 failed authentication attempts
+
+Flow io.jans.agamapasskey.authenticator
+    Basepath "authn"
+    Inputs userData mfaInfo
+
+//mfaInfo is an instance of class io.jans.agamapasskey.MFAUserInfo
+method = mfaInfo.preference
+
+When method is null     //pick the first if no preference has been defined
+    method = mfaInfo.enrolledMethods[0]
+
+Repeat 5 times max     //More than five failed attempts sounds suspicious 
+
+    //Launch the given authn flow
+    qname = [ "io.jans.agamapasskey.authenticator", method ]
+    qname = Call java.lang.String#join "." qname
+
+    Log "Launching flow" qname
+    obj | E = Trigger $qname userData true
+    
+    When E is not null
+        Log "@e Authentication flow % for user % crashed: %" qname userData.inum E
+        E = null
+        error = true
+    Otherwise
+        When obj.success is true
+            Finish true
+            
+        error = false
+        
+    obj = { enrolledMethods: mfaInfo.enrolledMethods, error: error }
+    //Show a page where the user can select the type of credential he wants to use
+    obj = RRF "selector.ftlh" obj
+    method = obj.selection
+
+obj = { success: false, error: "Those were too many attempts. Try again later" }
+Finish obj

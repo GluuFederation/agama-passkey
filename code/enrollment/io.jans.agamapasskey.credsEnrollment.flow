@@ -1,0 +1,93 @@
+//This flow launches several credential enrollment flows based on the configured
+//authentication methods (passed in param mfaSettings) for a given user (identified by
+//input param userData) until a given number of enrolled credentials is reached. The
+//user is also prompted to optionally choose which his preferred credential type is. 
+//The flow returns a positive value if enough credentials have been successfully
+//enrolled or a negative value when several failed attempts to enroll have taken place. 
+//In the case of a positive value, two pieces of data are attached: mfaInfo (an instance
+//of class io.jans.agamapasskey.MFAUserInfo) describing current enrollment-related data
+//for the user, and hadEnoughCreds (a boolean value) indicating whether this user had
+//enough credentials when this flow was originally launched
+
+Flow io.jans.agamapasskey.credsEnrollment
+    Basepath "enroller"
+    Inputs userData mfaSettings verifyEmail message
+
+Log "Credentials enrollment flow started" verifyEmail
+inum = userData.inum
+minCredsRequired = mfaSettings.minCredsRequired
+
+//mfaSettings is an instance of class io.jans.agamapasskey.MFASettigns
+madhu = Call io.jans.agamapasskey.EnrollmentHelper#new mfaSettings
+methods = Call madhu availableAuthnMethods
+
+When methods.empty is true
+    obj = { success: false, error: "No authentication methods available for enrollment/authentication" }
+    Finish obj
+
+hadEnoughCreds = true
+notification = { isError: false, message: message }
+Repeat 10 times max     //enough times for a person to give up, or the session to expire
+
+    mfaInfo = Call madhu userCredsInfo inum methods
+    count = mfaInfo.count
+    Log "User % has % credentials enrolled" inum count
+    
+    enough = Call madhu sufficientCreds count
+    Log "enough" enough
+    When enough is true
+        ems = mfaInfo.enrolledMethods
+        Log "@d User enrollments belong to methods %" ems
+
+        When mfaInfo.turnedOn is false
+            obj = { pref: null }
+        
+            //Show page for selection of preferred credential
+            When ems.length is not 1
+                Log "@d Prompting for a preferred method"
+                obj = { methods: ems }
+                
+                //if user didn't have initially all the creds required and now
+                //he has them, it means he just enrolled one cred successfully
+                When hadEnoughCreds is false 
+                    obj.message =  "Credential added successfully!"
+                    
+                obj = RRF "preference.ftlh" obj
+
+            changed = Call madhu setPreferredMethod inum obj.pref
+            When changed is false
+                Log "@w Preferred method was not set"
+                                                                 
+        obj = { success: true, data: { mfaInfo: mfaInfo, hadEnoughCreds: hadEnoughCreds } }
+        Finish obj
+        
+//    Otherwise
+//        When verifyEmail is true and idx[0] is 0    //nested code block applies for the 1st iteration only
+//            obj = Trigger io.jans.agamapasskey.emailVerification userData.email true
+//
+//            When obj.success is false
+//                Finish obj
+
+    hadEnoughCreds = false
+    data = { methods: methods, ncreds: count, minRequired: minCredsRequired, notification: notification }
+    outcome = RRF "selector.ftlh" data
+
+    //Forward to the selected method
+    qname = [ "io.jans.agamapasskey.credsEnrollment", outcome.method ]
+    qname = Call java.lang.String#join "." qname
+    Log "Triggering enrollment flow" qname
+    
+    outcome | E = Trigger $qname userData true
+    notification = { isError: true }
+
+    When E is not null
+        Log "@e Enrollment flow % for user % crashed: %" qname inum E
+        E = null
+    Otherwise
+        When outcome.success is true
+            notification = { isError: false, message: "Credential added successfully!" }
+        Otherwise
+            notification.message = outcome.error
+
+obj = { success: false, error: "You have failed to enroll the required credentials. Try again later" }
+Finish obj

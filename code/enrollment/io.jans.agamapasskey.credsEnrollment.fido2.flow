@@ -1,0 +1,32 @@
+//This flow allows the user to enroll a fido credential (e.g. a security key).
+//The flow returns a positive value when the enrollment was made successfully. If the
+//users decides to enroll a different type of credential, the flow terminates with a 
+//negative outcome. If the enrollment fails, the user stays at the page where he was
+//prompted to present his fido device
+//The user in question is identified by input param userData
+
+Flow io.jans.agamapasskey.credsEnrollment.fido2
+    Basepath "enroller/fido"
+    Inputs userData withEscape
+
+inum = userData.inum
+name = userData.name
+
+enroller = Call io.jans.agamapasskey.enroll.FidoEnroller#new
+detestable = Call enroller getAttestationMessage inum
+
+obj = { attestation: detestable, escape: withEscape }
+obj = RRF "fido.ftlh" obj
+    
+When obj.skipped is ""
+    Finish false
+
+key = Call enroller verifyRegistration inum obj.tokenResponse
+Log "ID of enrolled key is" key
+
+nickNamed = Call enroller nameIt inum name key
+
+When nickNamed is false
+    Log "Failed to set a nick name for %'s device" name
+    
+Finish true

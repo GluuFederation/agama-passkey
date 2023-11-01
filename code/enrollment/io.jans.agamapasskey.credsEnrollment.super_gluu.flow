@@ -1,0 +1,44 @@
+//This flow allows the user to enroll super gluu.
+//The flow returns a positive value when the enrollment was made and successfully
+//saved in the user's profile. Otherwise a negative value is returned - this includes
+//the case when the users decides to enroll a different type of credential
+//The user in question is identified by input param userData
+
+Flow io.jans.agamapasskey.credsEnrollment.super_gluu
+    Basepath "enroller/sg"
+    Configs conf
+    Inputs userData withEscape
+
+//Show a page warning the user an OTP app is required in the smartphone
+obj = { escape: withEscape }
+data = RRF "preQR.ftlh" obj
+    
+When data.skipped is ""     //user wants a different thing
+    Finish false
+
+enroller = Call io.jans.agamapasskey.SGValidator#new
+req = Call enroller QRRequest null
+
+//Show page for QR code scanning
+obj = { request: req, timeout: conf.timeout, escape: withEscape }
+data = RRF "code-scan.ftlh" obj
+
+When data.skipped is ""     //user wants a different thing
+    Finish false
+
+data = Call enroller validateEnrolledDevice
+dn = data.first
+When dn is null     //Enrollment had issues
+    obj = { success: false, error: data.second }
+    Finish obj
+
+inum = userData.inum
+Log "User % has successfully enrolled a super gluu device. Attaching to profile..." inum
+
+succ = Call enroller attach inum dn
+When succ is false
+    obj = { success: false, error: "Enrolled device couldn't be attached to user profile" }
+    Finish obj
+    
+Log "@d Device attached"
+Finish true
