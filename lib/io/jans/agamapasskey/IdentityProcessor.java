@@ -25,17 +25,16 @@ public class IdentityProcessor {
     private static final String INUM_ATTR = "inum";
     private static final String EXT_ATTR = "jansExtUid";
         
-    public static Map<String, String> accountFromEmail(String email) {
+    public static Map<String, String> accountFromUid(String uid) {
 
-        User user = getUser(UID, email);
+        User user = getUser(UID, uid);
         boolean local = user != null;
-        logger.debug("There is {} local account for {}", local ? "a" : "no", email);
+        logger.debug("There is {} local account for {}", local ? "a" : "no", uid);
 
         if (local) {
-            String uid = getSingleValuedAttr(user, UID);
             String inum = getSingleValuedAttr(user, INUM_ATTR);
             String name = getSingleValuedAttr(user, GIVEN_NAME);
-            String emailAux = getSingleValuedAttr(user, MAIL);
+            String email = getSingleValuedAttr(user, MAIL);
 
             if (name == null) {
                 name = getSingleValuedAttr(user, DISPLAY_NAME);
@@ -44,7 +43,7 @@ public class IdentityProcessor {
                     name = email.substring(0, email.indexOf("@"));
                 }
             }
-            return Map.of(UID, uid, INUM_ATTR, inum, "name", name, "email", emailAux);
+            return Map.of(UID, uid, INUM_ATTR, inum, "name", name, "email", email);
         }
         return Collections.emptyMap();
 

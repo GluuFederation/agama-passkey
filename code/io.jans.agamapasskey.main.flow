@@ -9,30 +9,24 @@ cdiUtil = Call io.jans.service.cdi.util.CdiUtil#bean authService
 loginResponse = {}
 Repeat 3 times max
     loginResponse = RRF "main.ftlh" loginResponse
-    Log "Login params" loginResponse
     loginResponse.success = Call cdiUtil authenticate loginResponse.username loginResponse.password
     loginResponse.uid = loginResponse.username
 
     When loginResponse.success is true
-        Log "Login completado" conf
-        userData = Call io.jans.agamapasskey.IdentityProcessor#accountFromEmail loginResponse.username
-        Log "userData" userData
+        userData = Call io.jans.agamapasskey.IdentityProcessor#accountFromUid loginResponse.uid
         obj = Trigger io.jans.agamapasskey.credsEnrollment userData conf true null
-        uid = userData.uid
 
         When obj.success is true
             When obj.data.hadEnoughCreds is false
                 //let the user in, he just finished enrolling his creds
-                Finish uid
+                Finish loginResponse.uid
 
             //Challenge the user to present his creds
             obj = Trigger io.jans.agamapasskey.authenticator userData obj.data.mfaInfo
             When obj.success is true
-                Finish uid
+                Finish loginResponse.uid
 
         //Fail if credential enrollment or authenticator flow failed
         Finish obj
-
-//        Finish loginResponse.uid
 
 Finish false
