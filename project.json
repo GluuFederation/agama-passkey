@@ -1,0 +1,26 @@
+{
+  "projectName": "agama-passkey",
+  "author": "Milton Ch.",
+  "type": "Community",
+  "version": "1.0.0",
+  "configs": {
+    "io.jans.agamapasskey.credsEnrollment.super_gluu": {
+      "timeout": 80
+    },
+    "io.jans.agamapasskey.authenticator.super_gluu": {
+      "timeout": 80
+    },
+    "io.jans.agamapasskey.credsEnrollment.otp": {
+      "timeout": 80,
+      "maxAttempts": 4
+    },
+    "io.jans.agamapasskey.main": {
+      "minCredsRequired": 2,
+      "supportedMethods": [
+        "otp",
+        "fido2",
+        "super_gluu"
+      ]
+    }
+  }
+}
