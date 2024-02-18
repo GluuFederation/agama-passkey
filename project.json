@@ -1,0 +1,29 @@
+{
+    "projectName": "agama-passkey",
+    "description": "Agama Passkey",
+    "type": "community",
+    "author": "Milton-Ch",
+    "version": "0.0.1",
+    "authorWebsite": "https://github.com/GluuFederation/agama-passkey",
+    "githubUri": "https://github.com/GluuFederation/agama-passkey",
+    "license": "apache-2.0",
+    "lastUpdated": "1702086312720",
+    "tags": [
+        "usb",
+        "fido",
+        "fido2",
+        "authentication",
+        "passkey"
+    ],
+    "noDirectLaunch": [],
+    "configs": {
+        "org.gluu.agama.passkey.add": {},
+        "org.gluu.agama.passkey.nickname": {},
+        "org.gluu.agama.passkey.list": {},
+        "org.gluu.agama.passkey.main": {
+            "scimClientId": "YOUR_SCIM_CLIENT_ID",
+            "scimClientSecret": "YOUR_SCIM_CLIENT_SECRET"
+        }
+    },
+    "name": "agama-passkey"
+}

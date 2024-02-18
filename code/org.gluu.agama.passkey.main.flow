@@ -1,0 +1,41 @@
+Flow org.gluu.agama.passkey.main
+     Basepath ""
+     Configs conf
+authService = Call io.jans.as.server.service.AuthenticationService#class
+cdiUtil = Call io.jans.service.cdi.util.CdiUtil#bean authService
+fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+authResult = {}
+obj = { success: true, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "" }
+Repeat 50 times max
+     mainForm = RRF "main.ftlh" obj
+     When mainForm.loginBtn is ""
+          authResult.success = Call cdiUtil authenticate mainForm.username mainForm.password
+          authResult.uid = mainForm.username
+          When authResult.success is true
+               userData = Call org.gluu.agama.passkey.IdentityProcessor#accountFromUid authResult.uid
+               listTrigger = Trigger org.gluu.agama.passkey.list userData conf
+               When listTrigger.success is true
+                    it_daszz = {success:true, data: { userId: userData.uid }}
+                    Finish it_daszz
+     When mainForm.loginWithPasskeyBtn is ""
+          detestable = Call fidoValidator assertionRequest null
+          obj.showError = false
+          obj.isAssertion = true
+          obj.assertion = detestable
+     When mainForm.tokenResponse is not ""
+          verifyResponse | E = Call fidoValidator verify mainForm.tokenResponse
+          When E is not null
+               obj.isAssertion = false
+               obj.showError = true
+               obj.errorTitle = "Passkey authentication failed."
+               obj.errorMessage = E.message
+          When E is null
+               it_jydzs = {success:true, data: { userId: verifyResponse }}
+               Finish it_jydzs
+     When mainForm.skipped is "skipped"
+          obj.isAssertion = false
+          obj.showError = true
+          obj.errorTitle = "Passkey authentication failed."
+          obj.errorMessage = mainForm.errorMessage
+it_jtnxk = {success:false, error: "Login attempt exceeded"}
+Finish it_jtnxk

@@ -1,0 +1,58 @@
+Flow org.gluu.agama.passkey.list
+     Basepath ""
+     Inputs userData scimSetting
+inum = userData.inum
+uid = userData.uid
+fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+scimFido2Helper = Call org.gluu.agama.passkey.ScimFido2Helper#new scimSetting
+fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
+obj = { fidoDevice: fidoDevice, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "", canEdit: false }
+Repeat 50 times max
+     listForm = RRF "passkey-list.ftlh" obj
+     When listForm.deviceId is not ""
+          obj.canEdit = false
+          obj.isAssertion = false
+          obj.showError = false
+          nickNamed | E = Call scimFido2Helper updateDevice inum listForm.deviceId listForm.nickname
+          When E is null
+               obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
+          When E is not null
+               obj.showError = false
+               obj.errorTitle = "Passkey failed to set a new nickname"
+               obj.errorMessage = E.message
+     When listForm.cancelItemBtn is ""
+          obj.canEdit = false
+          obj.isAssertion = false
+          obj.showError = false
+     When listForm.editItemBtn is ""
+          obj.canEdit = true
+          obj.isAssertion = false
+          obj.showError = false
+     When listForm.addAPasskeyBtn is ""
+          addTrigger = Trigger org.gluu.agama.passkey.add userData
+          obj.showError = false
+          obj.isAssertion = false
+          When addTrigger.success is true
+               obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
+     When listForm.loginWithPasskeyBtn is ""
+          detestable = Call fidoValidator assertionRequest uid
+          obj.showError = false
+          obj.isAssertion = true
+          obj.assertion = detestable
+     When listForm.skipped is "skipped"
+          obj.isAssertion = false
+          obj.showError = true
+          obj.errorTitle = "Passkey authentication failed."
+          obj.errorMessage = listForm.errorMessage
+     When listForm.tokenResponse is not "" and listForm.tokenResponse is not null
+          verifyResponse | E = Call fidoValidator verify listForm.tokenResponse
+          When E is not null
+               obj.showError = true
+               obj.errorTitle = "Passkey authentication failed."
+               obj.errorMessage = E.message
+               obj.isAssertion = false
+          When E is null
+               it_epblz = {success:true, data: { userId: inum }}
+               Finish it_epblz
+it_jqsex = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_jqsex
