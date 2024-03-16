@@ -225,7 +225,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2439.397462641198,
 				"y": 1027.816090494094
@@ -788,7 +788,7 @@
 			"id": "Agama-assignment-Node-6437c169-3f8e-4a5a-81c4-0a9549a14f94",
 			"position": {
 				"x": 830,
-				"y": 28.785805115604944
+				"y": 28.285805115604944
 			},
 			"type": "assignment",
 			"data": {
@@ -799,7 +799,7 @@
 				"inRepeatBlock": false,
 				"position": {
 					"x": 830,
-					"y": 28.785805115604944
+					"y": 28.285805115604944
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-6437c169-3f8e-4a5a-81c4-0a9549a14f94",
@@ -830,7 +830,7 @@
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 830,
-				"y": 28.785805115604944
+				"y": 28.285805115604944
 			}
 		},
 		{
@@ -839,7 +839,7 @@
 			"id": "Agama-call-Node-f3074067-fd6f-4547-8348-c66a511fd324",
 			"position": {
 				"x": 630,
-				"y": 28.785805115604944
+				"y": 28.285805115604944
 			},
 			"type": "call",
 			"data": {
@@ -850,7 +850,7 @@
 				"inRepeatBlock": false,
 				"position": {
 					"x": 630,
-					"y": 28.785805115604944
+					"y": 28.285805115604944
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-f3074067-fd6f-4547-8348-c66a511fd324",
@@ -858,7 +858,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "FidoValidator instance",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Get Instance FidoValidator",
 					"javaClassName": "org.gluu.agama.passkey.authn.FidoValidator",
 					"javaMethodName": "",
 					"javaVariableName": "",
@@ -866,7 +866,9 @@
 					"callType": "Create an instance",
 					"whenCondition": "",
 					"inRepeatBlock": false,
-					"arguments": [],
+					"arguments": [
+						"obj.isAssertion"
+					],
 					"nodeIcon": "material-symbols:code",
 					"asssignedVariableName": "fidoValidator"
 				},
@@ -876,7 +878,7 @@
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 630,
-				"y": 28.785805115604944
+				"y": 28.285805115604944
 			}
 		},
 		{
@@ -884,8 +886,8 @@
 			"height": 124,
 			"id": "Agama-call-Node-2ffc4a8d-7ebc-451f-a491-37072013d718",
 			"position": {
-				"x": 430,
-				"y": 28.785805115604944
+				"x": 429.5,
+				"y": 27.285805115604944
 			},
 			"type": "call",
 			"data": {
@@ -895,8 +897,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": false,
 				"position": {
-					"x": 430,
-					"y": 28.785805115604944
+					"x": 429.5,
+					"y": 27.285805115604944
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-2ffc4a8d-7ebc-451f-a491-37072013d718",
@@ -904,7 +906,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "CdiUtil static instance",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Get Instance CdiUtil",
 					"javaClassName": "io.jans.service.cdi.util.CdiUtil",
 					"javaMethodName": "bean",
 					"javaVariableName": "",
@@ -923,8 +925,8 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 430,
-				"y": 28.785805115604944
+				"x": 429.5,
+				"y": 27.285805115604944
 			}
 		},
 		{
@@ -932,8 +934,8 @@
 			"height": 124,
 			"id": "Agama-call-Node-c166c478-2040-4e2e-8967-a59d5da5ac46",
 			"position": {
-				"x": 230,
-				"y": 29.392902557802472
+				"x": 231,
+				"y": 27.892902557802472
 			},
 			"type": "call",
 			"data": {
@@ -943,8 +945,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": false,
 				"position": {
-					"x": 230,
-					"y": 29.392902557802472
+					"x": 231,
+					"y": 27.892902557802472
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-c166c478-2040-4e2e-8967-a59d5da5ac46",
@@ -952,7 +954,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Authentication service class",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Get Instance AuthenticationService",
 					"javaClassName": "io.jans.as.server.service.AuthenticationService",
 					"javaMethodName": "",
 					"javaVariableName": "",
@@ -969,8 +971,8 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 230,
-				"y": 29.392902557802472
+				"x": 231,
+				"y": 27.892902557802472
 			}
 		},
 		{
@@ -992,7 +994,7 @@
 					"type": "Agama-start-Flow",
 					"displayName": "Passkey Main",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Main flow to handle all sub flows",
 					"isTopLevelFlow": true,
 					"basepath": "",
 					"configParams": "{}",
@@ -1792,8 +1794,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1903,
-		"y": -660,
-		"zoom": 1
+		"x": -2.5016498622975405,
+		"y": 151.47434573210575,
+		"zoom": 0.5904963307147653
 	}
 }
