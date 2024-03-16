@@ -8,19 +8,25 @@ authService = Call io.jans.as.server.service.AuthenticationService#class
 cdiUtil = Call io.jans.service.cdi.util.CdiUtil#bean authService
 // Get Instance FidoValidator
 fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new obj.isAssertion
+// obj variable declaration, which is sent to the main form
 authResult = {}
 obj = { success: true, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "" }
-Repeat 50 times max
+Repeat 5 times max
+     // Load main.ftlh page and pass obj
      mainForm = RRF "main.ftlh" obj
      When mainForm.loginBtn is ""
+          // Call cdiUtil.authenticate using the credentials entered in main.ftlh
           authResult.success = Call cdiUtil authenticate mainForm.username mainForm.password
+          // Assign authResult.uid = mainForm.username
           authResult.uid = mainForm.username
           When authResult.success is true
                userData = Call org.gluu.agama.passkey.IdentityProcessor#accountFromUid authResult.uid
+               // Enrollment flow, Authentication and Passkey Device management 
                listTrigger = Trigger org.gluu.agama.passkey.list userData conf
                When listTrigger.success is true
-                    it_vwtzr = {success:true, data: { userId: userData.uid }}
-                    Finish it_vwtzr
+                    // Finish with success userId
+                    it_gykll = {success:true, data: { userId: userData.uid }}
+                    Finish it_gykll
      When mainForm.loginWithPasskeyBtn is ""
           detestable = Call fidoValidator assertionRequest null
           obj.showError = false
@@ -34,12 +40,13 @@ Repeat 50 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_abteo = {success:true, data: { userId: verifyResponse }}
-               Finish it_abteo
+               it_ostct = {success:true, data: { userId: verifyResponse }}
+               Finish it_ostct
      When mainForm.skipped is "skipped"
           obj.isAssertion = false
           obj.showError = true
           obj.errorTitle = "Passkey authentication failed."
           obj.errorMessage = mainForm.errorMessage
-it_gmsfa = {success:false, error: "Login attempt exceeded"}
-Finish it_gmsfa
+// When you have made the maximum number of attempts, the flow will be terminated.
+it_xqcgl = {success:false, error: "Login attempt exceeded"}
+Finish it_xqcgl
