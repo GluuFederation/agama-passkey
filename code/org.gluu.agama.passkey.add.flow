@@ -8,11 +8,13 @@ inum = userData.inum
 fidoEnroller = Call org.gluu.agama.passkey.enroll.FidoEnroller#new 
 // Declaration of the variable "obj" with initial data
 obj = { attestation: "{}", isAttestation: false, showError: false, errorTitle: "", errorMessage: "" }
-// Repeat 5 times the flow
 Repeat 5 times max
+     // Load passkey-add.ftlh page
      addDeviceForm = RRF "passkey-add.ftlh" obj
      When addDeviceForm.addPasskeyBtn is ""
+          // Invoke the method to initiate passkey registration
           detestable = Call fidoEnroller getAttestationMessage inum
+          // Show registration flow
           obj.isAttestation = true
           obj.attestation = detestable
           obj.showError = false
@@ -26,15 +28,16 @@ Repeat 5 times max
           When E is null and key is not null
                nicknameTrigger = Trigger org.gluu.agama.passkey.nickname key userData
                obj.isAttestation = false
-               it_ekkro = {success:true, data: { userId: inum, response: nicknameTrigger }}
-               Finish it_ekkro
+               it_dayhk = {success:true, data: { userId: inum, response: nicknameTrigger }}
+               Finish it_dayhk
           When E is not null
                obj.isAttestation = false
                obj.showError = true
                obj.errorTitle = "Passkey registration failed."
                obj.errorMessage = E.message
      When addDeviceForm.cancelBtn is ""
-          it_mqxpb = {success:false, error: "Cancel event"}
-          Finish it_mqxpb
-it_ghisg = {success:false, error: "Passkey registration attempt exceeded."}
-Finish it_ghisg
+          it_qmeyj = {success:false, error: "Cancel event"}
+          Finish it_qmeyj
+// Finish with error, because the limit of attempts was exceeded.
+it_dbinl = {success:false, error: "Passkey registration attempt exceeded."}
+Finish it_dbinl
