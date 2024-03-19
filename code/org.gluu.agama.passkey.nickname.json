@@ -16,7 +16,8 @@
 				"position": {
 					"x": 1077.2037444245784,
 					"y": 22.68040645338064
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -64,7 +65,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 1477,
 				"y": 21.888278709641696
@@ -337,7 +338,7 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 863,
@@ -526,8 +527,8 @@
 		}
 	],
 	"viewport": {
-		"x": -144.7755832734697,
-		"y": 127.52502549536723,
-		"zoom": 0.8467453123625274
+		"x": -801.8394766177992,
+		"y": 109.86464652058652,
+		"zoom": 1.2141948843950467
 	}
 }
