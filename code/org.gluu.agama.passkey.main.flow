@@ -26,8 +26,8 @@ Repeat 5 times max
                listTrigger = Trigger org.gluu.agama.passkey.list userData conf
                When listTrigger.success is true
                     // Finish with success userId
-                    it_vwglk = {success:true, data: { userId: userData.uid }}
-                    Finish it_vwglk
+                    it_zjljb = {success:true, data: { userId: userData.uid }}
+                    Finish it_zjljb
      When mainForm.loginWithPasskeyBtn is ""
           // Generates an assertion request without username
           detestable = Call fidoValidator assertionRequest null
@@ -39,20 +39,21 @@ Repeat 5 times max
           // FIDO Device Authentication Validation
           verifyResponse | E = Call fidoValidator verify mainForm.tokenResponse
           When E is not null
-               // Show validation error
+               // Show verification error
                obj.isAssertion = false
                obj.showError = true
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
                // Finish with success userId
-               it_yprqv = {success:true, data: { userId: verifyResponse }}
-               Finish it_yprqv
+               it_tvyay = {success:true, data: { userId: verifyResponse }}
+               Finish it_tvyay
      When mainForm.skipped is "skipped"
+          // Displays the authentication event cancellation error
           obj.isAssertion = false
           obj.showError = true
           obj.errorTitle = "Passkey authentication failed."
           obj.errorMessage = mainForm.errorMessage
 // When you have made the maximum number of attempts, the flow will be terminated.
-it_idmgh = {success:false, error: "Login attempt exceeded"}
-Finish it_idmgh
+it_xrspw = {success:false, error: "Login attempt exceeded"}
+Finish it_xrspw
