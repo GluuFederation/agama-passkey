@@ -1,12 +1,37 @@
 {
 	"nodes": [
 		{
+			"width": 270,
+			"height": 42,
+			"id": "Agama-note-518f8567-bf40-48f9-8d82-9b76e542bf79",
+			"position": {
+				"x": 1077.2037444245784,
+				"y": 22.68040645338064
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-518f8567-bf40-48f9-8d82-9b76e542bf79",
+				"type": "Agama-note",
+				"notes": "If the \"nameIt\" method stores successfully",
+				"position": {
+					"x": 1077.2037444245784,
+					"y": 22.68040645338064
+				}
+			},
+			"selected": false,
+			"positionAbsolute": {
+				"x": 1077.2037444245784,
+				"y": 22.68040645338064
+			},
+			"dragging": false
+		},
+		{
 			"width": 170,
 			"height": 124,
 			"id": "finish-2dd91a73-7ce4-480a-8ecb-31aee5748398",
 			"position": {
 				"x": 1477,
-				"y": 22.605256333649606
+				"y": 21.888278709641696
 			},
 			"type": "finish",
 			"data": {
@@ -21,7 +46,7 @@
 				],
 				"position": {
 					"x": 1477,
-					"y": 22.605256333649606
+					"y": 21.888278709641696
 				},
 				"agamaData": {
 					"id": "finish-2dd91a73-7ce4-480a-8ecb-31aee5748398",
@@ -30,7 +55,7 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "Successfully completes the flow",
 					"flowfilename": "",
 					"returnVariable": "{ userId: inum, message: \"Nickname passkey saved\"}",
 					"finishMode": "withSuccess",
@@ -39,10 +64,10 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 1477,
-				"y": 22.605256333649606
+				"y": 21.888278709641696
 			},
 			"dragging": false
 		},
@@ -51,8 +76,8 @@
 			"height": 124,
 			"id": "finish-64bedf04-d03b-41d8-9f9f-989a0692aa0e",
 			"position": {
-				"x": 1415,
-				"y": 287
+				"x": 1326.8117522470266,
+				"y": 314.2451497123007
 			},
 			"type": "finish",
 			"data": {
@@ -66,8 +91,8 @@
 					"Agama-when-Node-ab55f7db-7275-4b2f-99fe-d199109d2248.SUCCESS"
 				],
 				"position": {
-					"x": 1415,
-					"y": 287
+					"x": 1326.8117522470266,
+					"y": 314.2451497123007
 				},
 				"agamaData": {
 					"id": "finish-64bedf04-d03b-41d8-9f9f-989a0692aa0e",
@@ -76,19 +101,20 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "Ends the flow by responding error",
 					"flowfilename": "",
 					"returnVariable": "Nickname passkey failed to save",
 					"finishMode": "withFailure",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
-					"displayName": "Response error"
+					"displayName": "Response error",
+					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 1415,
-				"y": 287
+				"x": 1326.8117522470266,
+				"y": 314.2451497123007
 			},
 			"dragging": false
 		},
@@ -117,7 +143,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "FidoEnroller instance",
 					"hasComment": true,
-					"comment": "",
+					"comment": " Get Instance FidoEnroller",
 					"javaClassName": "org.gluu.agama.passkey.enroll.FidoEnroller",
 					"javaMethodName": "",
 					"javaVariableName": "",
@@ -163,7 +189,7 @@
 					"type": "Agama-rrf-Node",
 					"displayName": "Render nickname input view",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Load nickname.ftlh page",
 					"whenCondition": "",
 					"inRepeatBlock": false,
 					"assignments": [],
@@ -205,7 +231,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Set inum of userData",
 					"whenCondition": "",
 					"inRepeatBlock": false,
 					"assignments": [
@@ -265,7 +291,7 @@
 				"x": 30,
 				"y": 30
 			},
-			"selected": true,
+			"selected": false,
 			"dragging": false
 		},
 		{
@@ -293,7 +319,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Save nickname",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Invoke the method to save the nickname",
 					"javaClassName": "",
 					"javaMethodName": "nameIt",
 					"javaVariableName": "fidoEnroller",
@@ -301,7 +327,11 @@
 					"callType": "Call method on instance",
 					"whenCondition": "",
 					"inRepeatBlock": false,
-					"arguments": "inum nicknameForm.nickname key",
+					"arguments": [
+						"inum",
+						"nicknameForm.nickname",
+						"key"
+					],
 					"nodeIcon": "material-symbols:code",
 					"asssignedVariableName": "nickNamed"
 				},
@@ -319,8 +349,8 @@
 			"height": 140,
 			"id": "Agama-when-Node-ab55f7db-7275-4b2f-99fe-d199109d2248",
 			"position": {
-				"x": 1106,
-				"y": 84
+				"x": 1111.0188433680553,
+				"y": 81.84906712797624
 			},
 			"parentId": "Agama-call-Node-afbeff50-1e92-4a19-be6a-df6f7ada5c8b",
 			"type": "when",
@@ -331,8 +361,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": "",
 				"position": {
-					"x": 1106,
-					"y": 84
+					"x": 1111.0188433680553,
+					"y": 81.84906712797624
 				},
 				"agamaData": {
 					"id": "Agama-when-Node-ab55f7db-7275-4b2f-99fe-d199109d2248",
@@ -364,8 +394,8 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 1106,
-				"y": 84
+				"x": 1111.0188433680553,
+				"y": 81.84906712797624
 			},
 			"dragging": false,
 			"whenCondition": "",
@@ -496,8 +526,8 @@
 		}
 	],
 	"viewport": {
-		"x": 191,
-		"y": 41,
-		"zoom": 1
+		"x": -144.7755832734697,
+		"y": 127.52502549536723,
+		"zoom": 0.8467453123625274
 	}
 }
