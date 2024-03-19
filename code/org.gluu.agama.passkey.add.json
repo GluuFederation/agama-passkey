@@ -140,7 +140,7 @@
 			"height": 124,
 			"id": "finish-66411d62-3b1a-41c1-a1c1-991409763972",
 			"position": {
-				"x": 1106.4271181503207,
+				"x": 1105.4271181503207,
 				"y": 305.17520891631307
 			},
 			"type": "finish",
@@ -155,7 +155,7 @@
 					"Agama-repeat-Node-671e5a55-a960-43e8-8ddb-8b4e7fbd704f.InRepeatBlock"
 				],
 				"position": {
-					"x": 1106.4271181503207,
+					"x": 1105.4271181503207,
 					"y": 305.17520891631307
 				},
 				"agamaData": {
@@ -165,18 +165,19 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "Finish with error, because the limit of attempts was exceeded.",
 					"flowfilename": "",
 					"returnVariable": "Passkey registration attempt exceeded.",
 					"finishMode": "withFailure",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
-					"displayName": "Response error with attempt exceeded"
+					"displayName": "Response error",
+					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 1106.4271181503207,
+				"x": 1105.4271181503207,
 				"y": 305.17520891631307
 			},
 			"dragging": false
@@ -186,8 +187,8 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-30e73be7-0542-4a65-a91e-afe17fb7e07a",
 			"position": {
-				"x": 1825.6734620832526,
-				"y": 453.95111383169495
+				"x": 1870.6734620832526,
+				"y": 530.951113831695
 			},
 			"type": "assignment",
 			"data": {
@@ -197,8 +198,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": true,
 				"position": {
-					"x": 1825.6734620832526,
-					"y": 453.95111383169495
+					"x": 1870.6734620832526,
+					"y": 530.951113831695
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-30e73be7-0542-4a65-a91e-afe17fb7e07a",
@@ -206,7 +207,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Show registration flow",
 					"whenCondition": "",
 					"inRepeatBlock": true,
 					"assignments": [
@@ -230,10 +231,10 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
-				"x": 1825.6734620832526,
-				"y": 453.95111383169495
+				"x": 1870.6734620832526,
+				"y": 530.951113831695
 			},
 			"dragging": false
 		},
@@ -242,8 +243,8 @@
 			"height": 124,
 			"id": "Agama-call-Node-89618ba3-e6c2-4a38-83a3-9830374d4079",
 			"position": {
-				"x": 1541.468231853858,
-				"y": 453.1735954585718
+				"x": 1577.468231853858,
+				"y": 362.1735954585718
 			},
 			"type": "call",
 			"data": {
@@ -253,8 +254,8 @@
 				"whenCondition": "WhenTrue",
 				"inRepeatBlock": true,
 				"position": {
-					"x": 1541.468231853858,
-					"y": 453.1735954585718
+					"x": 1577.468231853858,
+					"y": 362.1735954585718
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-89618ba3-e6c2-4a38-83a3-9830374d4079",
@@ -262,7 +263,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Attestation request",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Invoke the method to initiate passkey registration",
 					"javaClassName": "",
 					"javaMethodName": "getAttestationMessage",
 					"javaVariableName": "fidoEnroller",
@@ -280,8 +281,8 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 1541.468231853858,
-				"y": 453.1735954585718
+				"x": 1577.468231853858,
+				"y": 362.1735954585718
 			},
 			"dragging": false
 		},
@@ -508,7 +509,7 @@
 			"id": "Agama-rrf-Node-ae26dbde-6160-4efd-b78b-580f9e92c847",
 			"position": {
 				"x": 1111.2312188408016,
-				"y": 34.300565596259844
+				"y": 33.300565596259844
 			},
 			"type": "rrf",
 			"data": {
@@ -519,7 +520,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 1111.2312188408016,
-					"y": 34.300565596259844
+					"y": 33.300565596259844
 				},
 				"agamaData": {
 					"id": "Agama-rrf-Node-ae26dbde-6160-4efd-b78b-580f9e92c847",
@@ -527,7 +528,7 @@
 					"type": "Agama-rrf-Node",
 					"displayName": "Render passkey add view",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Load passkey-add.ftlh page",
 					"whenCondition": "",
 					"inRepeatBlock": true,
 					"assignments": [],
@@ -543,7 +544,7 @@
 			"selected": false,
 			"positionAbsolute": {
 				"x": 1111.2312188408016,
-				"y": 34.300565596259844
+				"y": 33.300565596259844
 			},
 			"dragging": false
 		},
@@ -552,8 +553,8 @@
 			"height": 124,
 			"id": "Agama-repeat-Node-671e5a55-a960-43e8-8ddb-8b4e7fbd704f",
 			"position": {
-				"x": 836.4714909797192,
-				"y": 26.5
+				"x": 851.4714909797192,
+				"y": 27.5
 			},
 			"type": "repeat",
 			"data": {
@@ -567,8 +568,8 @@
 					"Agama-repeat-Node-671e5a55-a960-43e8-8ddb-8b4e7fbd704f.InRepeatBlock"
 				],
 				"position": {
-					"x": 836.4714909797192,
-					"y": 26.5
+					"x": 851.4714909797192,
+					"y": 27.5
 				},
 				"agamaData": {
 					"id": "Agama-repeat-Node-671e5a55-a960-43e8-8ddb-8b4e7fbd704f",
@@ -580,14 +581,14 @@
 					"hasComment": true,
 					"hasNoRepeat": true,
 					"displayName": "Repeat 5 times",
-					"comment": "Repeat 5 times the flow"
+					"comment": ""
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
-				"x": 836.4714909797192,
-				"y": 26.5
+				"x": 851.4714909797192,
+				"y": 27.5
 			},
 			"dragging": false
 		},
@@ -935,8 +936,8 @@
 			"height": 140,
 			"id": "Agama-when-Node-54662547-493b-47bf-aba2-02655f80abd8",
 			"position": {
-				"x": 1716.8942003984787,
-				"y": 84.76513591151473
+				"x": 1713.8942003984787,
+				"y": 81.76513591151473
 			},
 			"parentId": "Agama-when-Node-29f9a2a0-4165-49d2-a90c-42cc4653d99b",
 			"type": "when",
@@ -947,8 +948,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": "",
 				"position": {
-					"x": 1716.8942003984787,
-					"y": 84.76513591151473
+					"x": 1713.8942003984787,
+					"y": 81.76513591151473
 				},
 				"agamaData": {
 					"id": "Agama-when-Node-54662547-493b-47bf-aba2-02655f80abd8",
@@ -979,8 +980,8 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 1716.8942003984787,
-				"y": 84.76513591151473
+				"x": 1713.8942003984787,
+				"y": 81.76513591151473
 			},
 			"whenCondition": "",
 			"inRepeatBlock": ""
@@ -1546,8 +1547,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1229.6789798023938,
-		"y": 75.04657839970196,
-		"zoom": 2
+		"x": -1195,
+		"y": -190,
+		"zoom": 1
 	}
 }
