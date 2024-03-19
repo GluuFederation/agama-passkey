@@ -16,9 +16,10 @@
 				"position": {
 					"x": 2382.090062100262,
 					"y": 23.801467714093917
-				}
+				},
+				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2382.090062100262,
 				"y": 23.801467714093917
@@ -108,8 +109,8 @@
 			"height": 124,
 			"id": "finish-aa9b5b7b-1306-4e1b-ac11-bc113973efcc",
 			"position": {
-				"x": 3147.929153619497,
-				"y": 550.0203304705267
+				"x": 3268.390405085309,
+				"y": 550.0203304705266
 			},
 			"type": "finish",
 			"data": {
@@ -120,8 +121,8 @@
 				"inRepeatBlock": true,
 				"handles": [],
 				"position": {
-					"x": 3147.929153619497,
-					"y": 550.0203304705267
+					"x": 3268.390405085309,
+					"y": 550.0203304705266
 				},
 				"agamaData": {
 					"id": "finish-aa9b5b7b-1306-4e1b-ac11-bc113973efcc",
@@ -142,8 +143,8 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 3147.929153619497,
-				"y": 550.0203304705267
+				"x": 3268.390405085309,
+				"y": 550.0203304705266
 			}
 		},
 		{
@@ -151,7 +152,7 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-d325f7dc-ec4f-4278-a2b9-e5f6b12e10da",
 			"position": {
-				"x": 2947.929153619497,
+				"x": 2998.711838060967,
 				"y": 551.3813347221254
 			},
 			"type": "assignment",
@@ -162,7 +163,7 @@
 				"whenCondition": "",
 				"inRepeatBlock": true,
 				"position": {
-					"x": 2947.929153619497,
+					"x": 2998.711838060967,
 					"y": 551.3813347221254
 				},
 				"agamaData": {
@@ -188,7 +189,7 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 2947.929153619497,
+				"x": 2998.711838060967,
 				"y": 551.3813347221254
 			}
 		},
@@ -395,7 +396,7 @@
 			"id": "Agama-assignment-Node-a6c6a912-328f-437b-8f2e-e919d507dea8",
 			"position": {
 				"x": 1939.6532737181922,
-				"y": 286.14663172508125
+				"y": 284.96563906365174
 			},
 			"type": "assignment",
 			"data": {
@@ -406,7 +407,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 1939.6532737181922,
-					"y": 286.14663172508125
+					"y": 284.96563906365174
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-a6c6a912-328f-437b-8f2e-e919d507dea8",
@@ -446,7 +447,7 @@
 			"selected": false,
 			"positionAbsolute": {
 				"x": 1939.6532737181922,
-				"y": 286.14663172508125
+				"y": 284.96563906365174
 			},
 			"dragging": false
 		},
@@ -455,8 +456,8 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-0736a836-5e6e-467a-a039-1b78c39b2191",
 			"position": {
-				"x": 3256.135588177542,
-				"y": 282.98761951264976
+				"x": 3286.84139737471,
+				"y": 290.07357548122695
 			},
 			"type": "assignment",
 			"data": {
@@ -466,8 +467,8 @@
 				"whenCondition": "WhenTrue",
 				"inRepeatBlock": true,
 				"position": {
-					"x": 3256.135588177542,
-					"y": 282.98761951264976
+					"x": 3286.84139737471,
+					"y": 290.07357548122695
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-0736a836-5e6e-467a-a039-1b78c39b2191",
@@ -506,8 +507,8 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 3256.135588177542,
-				"y": 282.98761951264976
+				"x": 3286.84139737471,
+				"y": 290.07357548122695
 			},
 			"dragging": false
 		},
@@ -1150,8 +1151,8 @@
 			"height": 140,
 			"id": "Agama-when-Node-5d7551be-273f-48d3-b36f-dfc94fe5e9db",
 			"position": {
-				"x": 2921.3596598374193,
-				"y": 337.55318742631744
+				"x": 2929.6266084674257,
+				"y": 344.6391433948945
 			},
 			"parentId": "Agama-when-Node-29b9deb9-9961-4936-a8f8-d1ff6e8b7ec6",
 			"type": "when",
@@ -1162,8 +1163,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": "",
 				"position": {
-					"x": 2921.3596598374193,
-					"y": 337.55318742631744
+					"x": 2929.6266084674257,
+					"y": 344.6391433948945
 				},
 				"agamaData": {
 					"id": "Agama-when-Node-5d7551be-273f-48d3-b36f-dfc94fe5e9db",
@@ -1192,8 +1193,8 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 2921.3596598374193,
-				"y": 337.55318742631744
+				"x": 2929.6266084674257,
+				"y": 344.6391433948945
 			},
 			"dragging": false,
 			"whenCondition": "",
@@ -1650,8 +1651,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1452.2096353989555,
-		"y": 65.29038431951449,
+		"x": -1632.2096353989555,
+		"y": -4.709615680485513,
 		"zoom": 0.8467453123625271
 	}
 }
