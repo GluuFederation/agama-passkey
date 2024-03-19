@@ -16,7 +16,8 @@
 				"position": {
 					"x": 3133.838841777686,
 					"y": 605.7582048541075
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -331,7 +332,7 @@
 			"id": "Agama-trigger-Node-c2baf16d-2fe3-4b88-852f-eec08f53423f",
 			"position": {
 				"x": 2676.050717328836,
-				"y": 1025.7139507389147
+				"y": 1024.7412957915026
 			},
 			"type": "trigger",
 			"data": {
@@ -342,7 +343,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 2676.050717328836,
-					"y": 1025.7139507389147
+					"y": 1024.7412957915026
 				},
 				"agamaData": {
 					"id": "Agama-trigger-Node-c2baf16d-2fe3-4b88-852f-eec08f53423f",
@@ -361,15 +362,15 @@
 					],
 					"asssignedVariableName": "listTrigger",
 					"exceptionVariableField": "",
-					"nodeColor": "#90caf9"
+					"nodeColor": "#80deea"
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 2676.050717328836,
-				"y": 1025.7139507389147
+				"y": 1024.7412957915026
 			}
 		},
 		{
@@ -378,7 +379,7 @@
 			"id": "Agama-call-Node-38b6f190-4dff-478d-852d-967c2d51b60b",
 			"position": {
 				"x": 2439.397462641198,
-				"y": 1027.316090494094
+				"y": 1026.816090494094
 			},
 			"type": "call",
 			"data": {
@@ -389,7 +390,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 2439.397462641198,
-					"y": 1027.316090494094
+					"y": 1026.816090494094
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-38b6f190-4dff-478d-852d-967c2d51b60b",
@@ -397,7 +398,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Get account user by UID",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Searches for user data by UID and loads into userData variable",
 					"javaClassName": "org.gluu.agama.passkey.IdentityProcessor",
 					"javaMethodName": "accountFromUid",
 					"javaVariableName": "",
@@ -416,7 +417,7 @@
 			"selected": false,
 			"positionAbsolute": {
 				"x": 2439.397462641198,
-				"y": 1027.316090494094
+				"y": 1026.816090494094
 			},
 			"dragging": false
 		},
@@ -674,7 +675,7 @@
 			"id": "Agama-assignment-Node-3444c2b9-4561-493d-9018-7f434fec2b36",
 			"position": {
 				"x": 2951.500988629287,
-				"y": 838.5287999353517
+				"y": 836.5287999353517
 			},
 			"type": "assignment",
 			"data": {
@@ -685,7 +686,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 2951.500988629287,
-					"y": 838.5287999353517
+					"y": 836.5287999353517
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-3444c2b9-4561-493d-9018-7f434fec2b36",
@@ -718,14 +719,15 @@
 							"assignedVariableName": "obj.errorMessage"
 						}
 					],
-					"nodeIcon": "material-symbols:equal"
+					"nodeIcon": "material-symbols:equal",
+					"nodeColor": "#ef9a9a"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 2951.500988629287,
-				"y": 838.5287999353517
+				"y": 836.5287999353517
 			},
 			"dragging": false
 		},
@@ -1986,8 +1988,8 @@
 		}
 	],
 	"viewport": {
-		"x": -692.4038792155745,
-		"y": -243.76349255946207,
-		"zoom": 0.52850902028069
+		"x": -3467.3121401723097,
+		"y": -674.2693628045315,
+		"zoom": 1.4339552480158273
 	}
 }
