@@ -12,8 +12,8 @@ fidoEnroller = Call org.gluu.agama.passkey.enroll.FidoEnroller#new
 nickNamed = Call fidoEnroller nameIt inum nicknameForm.nickname key
 When nickNamed is false
      // Ends the flow by responding error
-     it_geqao = {success:false, error: "Nickname passkey failed to save"}
-     Finish it_geqao
+     it_pnlpv = {success:false, error: "Nickname passkey failed to save"}
+     Finish it_pnlpv
 // Successfully completes the flow
-it_xygel = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
-Finish it_xygel
+it_qopdn = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
+Finish it_qopdn
