@@ -2,6 +2,31 @@
 	"nodes": [
 		{
 			"width": 270,
+			"height": 55,
+			"id": "Agama-note-f505a12b-3dc3-4eae-b7df-2919259427c5",
+			"position": {
+				"x": 2382.090062100262,
+				"y": 23.801467714093917
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-f505a12b-3dc3-4eae-b7df-2919259427c5",
+				"type": "Agama-note",
+				"notes": "If the user does not start the passkey registration process and cancels all flow",
+				"position": {
+					"x": 2382.090062100262,
+					"y": 23.801467714093917
+				}
+			},
+			"selected": true,
+			"positionAbsolute": {
+				"x": 2382.090062100262,
+				"y": 23.801467714093917
+			},
+			"dragging": false
+		},
+		{
+			"width": 270,
 			"height": 42,
 			"id": "Agama-note-2bd0b6c1-3ba5-45fa-87b9-7906057b40e5",
 			"position": {
@@ -16,7 +41,8 @@
 				"position": {
 					"x": 2021,
 					"y": 29.599999999999994
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -41,7 +67,8 @@
 				"position": {
 					"x": 1687.7374999999997,
 					"y": 28
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -66,7 +93,8 @@
 				"position": {
 					"x": 1350,
 					"y": 16
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -1622,8 +1650,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1530.9864046978214,
-		"y": 49.15690574614109,
-		"zoom": 1
+		"x": -1452.2096353989555,
+		"y": 65.29038431951449,
+		"zoom": 0.8467453123625271
 	}
 }
