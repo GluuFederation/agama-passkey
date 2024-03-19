@@ -245,7 +245,7 @@
 					"type": "Agama-start-Flow",
 					"displayName": "Passkey Nickname",
 					"hasComment": true,
-					"comment": "",
+					"comment": "This flow is responsible for establishing a nickname for the FIDO device, which is correctly registered.",
 					"isTopLevelFlow": true,
 					"basepath": "",
 					"configParams": "{}",
@@ -265,7 +265,7 @@
 				"x": 30,
 				"y": 30
 			},
-			"selected": false,
+			"selected": true,
 			"dragging": false
 		},
 		{
@@ -304,9 +304,10 @@
 					"arguments": "inum nicknameForm.nickname key",
 					"nodeIcon": "material-symbols:code",
 					"asssignedVariableName": "nickNamed"
-				}
+				},
+				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 863,
@@ -495,8 +496,8 @@
 		}
 	],
 	"viewport": {
-		"x": -379,
-		"y": 117,
+		"x": 191,
+		"y": 41,
 		"zoom": 1
 	}
 }
