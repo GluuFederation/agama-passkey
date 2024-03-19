@@ -2,12 +2,18 @@
 Flow org.gluu.agama.passkey.nickname
      Basepath ""
      Inputs key userData
+// Set inum of userData
 inum = userData.inum
+// Load nickname.ftlh page
 nicknameForm = RRF "nickname.ftlh" 
+//  Get Instance FidoEnroller
 fidoEnroller = Call org.gluu.agama.passkey.enroll.FidoEnroller#new 
+// Invoke the method to save the nickname
 nickNamed = Call fidoEnroller nameIt inum nicknameForm.nickname key
 When nickNamed is false
-     it_ozwrh = {success:false, error: "Nickname passkey failed to save"}
-     Finish it_ozwrh
-it_ewrnk = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
-Finish it_ewrnk
+     // Ends the flow by responding error
+     it_geqao = {success:false, error: "Nickname passkey failed to save"}
+     Finish it_geqao
+// Successfully completes the flow
+it_xygel = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
+Finish it_xygel
