@@ -1,6 +1,56 @@
 {
 	"nodes": [
 		{
+			"width": 211,
+			"height": 30,
+			"id": "Agama-note-98599c36-fb06-4c7d-8249-c979155a6846",
+			"position": {
+				"x": 2923.129382736351,
+				"y": 296.7565811825262
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-98599c36-fb06-4c7d-8249-c979155a6846",
+				"type": "Agama-note",
+				"notes": "If the verification fails",
+				"position": {
+					"x": 2923.129382736351,
+					"y": 296.7565811825262
+				}
+			},
+			"selected": false,
+			"positionAbsolute": {
+				"x": 2923.129382736351,
+				"y": 296.7565811825262
+			},
+			"dragging": false
+		},
+		{
+			"width": 270,
+			"height": 42,
+			"id": "Agama-note-b2a3fdaa-5e64-4944-b335-301f93a1d118",
+			"position": {
+				"x": 2519.5,
+				"y": 285.7
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-b2a3fdaa-5e64-4944-b335-301f93a1d118",
+				"type": "Agama-note",
+				"notes": "If the verification was successfully",
+				"position": {
+					"x": 2519.5,
+					"y": 285.7
+				}
+			},
+			"selected": false,
+			"positionAbsolute": {
+				"x": 2519.5,
+				"y": 285.7
+			},
+			"dragging": false
+		},
+		{
 			"width": 270,
 			"height": 55,
 			"id": "Agama-note-f505a12b-3dc3-4eae-b7df-2919259427c5",
@@ -228,7 +278,8 @@
 						"userData"
 					],
 					"asssignedVariableName": "nicknameTrigger",
-					"exceptionVariableField": ""
+					"exceptionVariableField": "",
+					"nodeColor": "#80deea"
 				},
 				"skake": false
 			},
@@ -444,7 +495,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 1939.6532737181922,
 				"y": 283.96563906365174
@@ -505,7 +556,7 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 3286.84139737471,
 				"y": 290.07357548122695
@@ -1097,7 +1148,7 @@
 			"id": "Agama-when-Node-29b9deb9-9961-4936-a8f8-d1ff6e8b7ec6",
 			"position": {
 				"x": 2554.4883489450567,
-				"y": 343.39671284355114
+				"y": 342.89671284355114
 			},
 			"parentId": "Agama-call-Node-c8192fec-7f06-447d-b680-556c680072ad",
 			"type": "when",
@@ -1109,7 +1160,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 2554.4883489450567,
-					"y": 343.39671284355114
+					"y": 342.89671284355114
 				},
 				"agamaData": {
 					"id": "Agama-when-Node-29b9deb9-9961-4936-a8f8-d1ff6e8b7ec6",
@@ -1143,7 +1194,7 @@
 			"selected": false,
 			"positionAbsolute": {
 				"x": 2554.4883489450567,
-				"y": 343.39671284355114
+				"y": 342.89671284355114
 			},
 			"dragging": false
 		},
@@ -1652,8 +1703,8 @@
 		}
 	],
 	"viewport": {
-		"x": -2187,
-		"y": 44,
-		"zoom": 1
+		"x": -1502.2008309518044,
+		"y": -144.0423135093488,
+		"zoom": 0.7965250198808489
 	}
 }
