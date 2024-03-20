@@ -33,16 +33,17 @@ Repeat 5 times max
                // If there is an active registration flow, it will be canceled
                obj.isAttestation = false
                // Ends the flow by replying to the user's inum
-               it_lwoxi = {success:true, data: { userId: inum, response: nicknameTrigger }}
-               Finish it_lwoxi
+               it_jkrgr = {success:true, data: { userId: inum, response: nicknameTrigger }}
+               Finish it_jkrgr
           When E is not null
+               // Show error with detail obtained from verify method
                obj.isAttestation = false
                obj.showError = true
                obj.errorTitle = "Passkey registration failed."
                obj.errorMessage = E.message
      When addDeviceForm.cancelBtn is ""
-          it_mtahl = {success:false, error: "Cancel event"}
-          Finish it_mtahl
+          it_zxfkp = {success:false, error: "Cancel event"}
+          Finish it_zxfkp
 // Finish with error, because the limit of attempts was exceeded.
-it_hiqpi = {success:false, error: "Passkey registration attempt exceeded."}
-Finish it_hiqpi
+it_qudef = {success:false, error: "Passkey registration attempt exceeded."}
+Finish it_qudef
