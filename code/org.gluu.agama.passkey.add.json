@@ -596,7 +596,8 @@
 					"returnVariable": "Cancel event",
 					"finishMode": "withFailure",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
-					"displayName": "Response error with cancel event"
+					"displayName": "Response error with cancel event",
+					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
@@ -881,7 +882,7 @@
 			"height": 140,
 			"id": "Agama-when-Node-0b0ddd5b-abf4-40c7-8ae6-7ed797b6e79e",
 			"position": {
-				"x": 2416.5159236786,
+				"x": 2418.5159236786,
 				"y": 88.859370077025
 			},
 			"parentId": "Agama-when-Node-b5e9fd3e-71c5-454c-a0bd-527066555b7b",
@@ -893,7 +894,7 @@
 				"whenCondition": "",
 				"inRepeatBlock": "",
 				"position": {
-					"x": 2416.5159236786,
+					"x": 2418.5159236786,
 					"y": 88.859370077025
 				},
 				"agamaData": {
@@ -923,7 +924,7 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 2416.5159236786,
+				"x": 2418.5159236786,
 				"y": 88.859370077025
 			},
 			"dragging": false,
@@ -935,8 +936,8 @@
 			"height": 140,
 			"id": "Agama-when-Node-b5e9fd3e-71c5-454c-a0bd-527066555b7b",
 			"position": {
-				"x": 2058.2699127694164,
-				"y": 86.61618817178942
+				"x": 2064.2699127694164,
+				"y": 87.61618817178942
 			},
 			"parentId": "Agama-when-Node-54662547-493b-47bf-aba2-02655f80abd8",
 			"type": "when",
@@ -947,8 +948,8 @@
 				"whenCondition": "",
 				"inRepeatBlock": "",
 				"position": {
-					"x": 2058.2699127694164,
-					"y": 86.61618817178942
+					"x": 2064.2699127694164,
+					"y": 87.61618817178942
 				},
 				"agamaData": {
 					"id": "Agama-when-Node-b5e9fd3e-71c5-454c-a0bd-527066555b7b",
@@ -979,8 +980,8 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 2058.2699127694164,
-				"y": 86.61618817178942
+				"x": 2064.2699127694164,
+				"y": 87.61618817178942
 			},
 			"whenCondition": "",
 			"inRepeatBlock": ""
@@ -1651,8 +1652,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1632.2096353989555,
-		"y": -4.709615680485513,
-		"zoom": 0.8467453123625271
+		"x": -2072,
+		"y": -4,
+		"zoom": 1
 	}
 }
