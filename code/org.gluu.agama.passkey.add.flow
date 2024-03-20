@@ -19,25 +19,27 @@ Repeat 5 times max
           obj.attestation = detestable
           obj.showError = false
      When addDeviceForm.skipped is "skipped"
+          // Process cancellation error displayed
           obj.isAttestation = false
           obj.showError = true
           obj.errorTitle = "Passkey registration failed."
           obj.errorMessage = addDeviceForm.errorMessage
      When addDeviceForm.tokenResponse is not ""
+          // Invoke method to verify passkey registration
           key | E = Call fidoEnroller verifyRegistration inum addDeviceForm.tokenResponse
           When E is null and key is not null
                nicknameTrigger = Trigger org.gluu.agama.passkey.nickname key userData
                obj.isAttestation = false
-               it_pcrup = {success:true, data: { userId: inum, response: nicknameTrigger }}
-               Finish it_pcrup
+               it_usyym = {success:true, data: { userId: inum, response: nicknameTrigger }}
+               Finish it_usyym
           When E is not null
                obj.isAttestation = false
                obj.showError = true
                obj.errorTitle = "Passkey registration failed."
                obj.errorMessage = E.message
      When addDeviceForm.cancelBtn is ""
-          it_soswc = {success:false, error: "Cancel event"}
-          Finish it_soswc
+          it_ioeax = {success:false, error: "Cancel event"}
+          Finish it_ioeax
 // Finish with error, because the limit of attempts was exceeded.
-it_vehhb = {success:false, error: "Passkey registration attempt exceeded."}
-Finish it_vehhb
+it_lfety = {success:false, error: "Passkey registration attempt exceeded."}
+Finish it_lfety
