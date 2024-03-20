@@ -396,7 +396,7 @@
 			"id": "Agama-assignment-Node-a6c6a912-328f-437b-8f2e-e919d507dea8",
 			"position": {
 				"x": 1939.6532737181922,
-				"y": 284.96563906365174
+				"y": 283.96563906365174
 			},
 			"type": "assignment",
 			"data": {
@@ -407,7 +407,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 1939.6532737181922,
-					"y": 284.96563906365174
+					"y": 283.96563906365174
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-a6c6a912-328f-437b-8f2e-e919d507dea8",
@@ -415,7 +415,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Process cancellation error displayed",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": true,
 					"assignments": [
@@ -444,10 +444,10 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 1939.6532737181922,
-				"y": 284.96563906365174
+				"y": 283.96563906365174
 			},
 			"dragging": false
 		},
@@ -518,7 +518,7 @@
 			"id": "Agama-call-Node-c8192fec-7f06-447d-b680-556c680072ad",
 			"position": {
 				"x": 2237.637495839028,
-				"y": 289.20501285234945
+				"y": 288.20501285234945
 			},
 			"type": "call",
 			"data": {
@@ -529,7 +529,7 @@
 				"inRepeatBlock": true,
 				"position": {
 					"x": 2237.637495839028,
-					"y": 289.20501285234945
+					"y": 288.20501285234945
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-c8192fec-7f06-447d-b680-556c680072ad",
@@ -537,7 +537,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Attestation verify",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Invoke method to verify passkey registration",
 					"javaClassName": "",
 					"javaMethodName": "verifyRegistration",
 					"javaVariableName": "fidoEnroller",
@@ -558,7 +558,7 @@
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 2237.637495839028,
-				"y": 289.20501285234945
+				"y": 288.20501285234945
 			}
 		},
 		{
@@ -1652,8 +1652,8 @@
 		}
 	],
 	"viewport": {
-		"x": -2072,
-		"y": -4,
+		"x": -2187,
+		"y": 44,
 		"zoom": 1
 	}
 }
