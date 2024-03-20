@@ -28,18 +28,21 @@ Repeat 5 times max
           // Invoke method to verify passkey registration
           key | E = Call fidoEnroller verifyRegistration inum addDeviceForm.tokenResponse
           When E is null and key is not null
+               // Flow to assign a nickname to the registered passkey
                nicknameTrigger = Trigger org.gluu.agama.passkey.nickname key userData
+               // If there is an active registration flow, it will be canceled
                obj.isAttestation = false
-               it_dviqs = {success:true, data: { userId: inum, response: nicknameTrigger }}
-               Finish it_dviqs
+               // Ends the flow by replying to the user's inum
+               it_lwoxi = {success:true, data: { userId: inum, response: nicknameTrigger }}
+               Finish it_lwoxi
           When E is not null
                obj.isAttestation = false
                obj.showError = true
                obj.errorTitle = "Passkey registration failed."
                obj.errorMessage = E.message
      When addDeviceForm.cancelBtn is ""
-          it_pafxw = {success:false, error: "Cancel event"}
-          Finish it_pafxw
+          it_mtahl = {success:false, error: "Cancel event"}
+          Finish it_mtahl
 // Finish with error, because the limit of attempts was exceeded.
-it_qlbze = {success:false, error: "Passkey registration attempt exceeded."}
-Finish it_qlbze
+it_hiqpi = {success:false, error: "Passkey registration attempt exceeded."}
+Finish it_hiqpi
