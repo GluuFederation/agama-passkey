@@ -16,7 +16,8 @@
 				"position": {
 					"x": 2923.129382736351,
 					"y": 296.7565811825262
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -41,7 +42,8 @@
 				"position": {
 					"x": 2519.5,
 					"y": 285.7
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -160,7 +162,7 @@
 			"id": "finish-aa9b5b7b-1306-4e1b-ac11-bc113973efcc",
 			"position": {
 				"x": 3268.390405085309,
-				"y": 550.0203304705266
+				"y": 548.0203304705266
 			},
 			"type": "finish",
 			"data": {
@@ -172,7 +174,7 @@
 				"handles": [],
 				"position": {
 					"x": 3268.390405085309,
-					"y": 550.0203304705266
+					"y": 548.0203304705266
 				},
 				"agamaData": {
 					"id": "finish-aa9b5b7b-1306-4e1b-ac11-bc113973efcc",
@@ -181,7 +183,7 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "Ends the flow by replying to the user's inum",
 					"flowfilename": "",
 					"returnVariable": "{ userId: inum, response: nicknameTrigger }",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
@@ -190,11 +192,11 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 3268.390405085309,
-				"y": 550.0203304705266
+				"y": 548.0203304705266
 			}
 		},
 		{
@@ -222,7 +224,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "If there is an active registration flow, it will be canceled",
 					"whenCondition": "",
 					"inRepeatBlock": true,
 					"assignments": [
@@ -268,7 +270,7 @@
 					"type": "Agama-trigger-Node",
 					"displayName": "Nickname trigger view",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Flow to assign a nickname to the registered passkey",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": true,
 					"nodeIcon": "fluent-mdl2:trigger-approval",
@@ -556,7 +558,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 3286.84139737471,
 				"y": 290.07357548122695
@@ -1703,8 +1705,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1502.2008309518044,
-		"y": -144.0423135093488,
-		"zoom": 0.7965250198808489
+		"x": -2209,
+		"y": -155,
+		"zoom": 1
 	}
 }
