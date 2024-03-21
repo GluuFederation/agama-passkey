@@ -11,8 +11,9 @@ fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new
 scimFido2Helper = Call org.gluu.agama.passkey.ScimFido2Helper#new scimSetting
 // Passkey list by user's inum
 fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
+// Declare the variable "obj" that contains the data for this flow
 obj = { fidoDevice: fidoDevice, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "", canEdit: false }
-Repeat 50 times max
+Repeat 10 times max
      listForm = RRF "passkey-list.ftlh" obj
      When listForm.deviceId is not ""
           obj.canEdit = false
@@ -57,7 +58,7 @@ Repeat 50 times max
                obj.errorMessage = E.message
                obj.isAssertion = false
           When E is null
-               it_ndijd = {success:true, data: { userId: inum }}
-               Finish it_ndijd
-it_bktxa = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_bktxa
+               it_qhqce = {success:true, data: { userId: inum }}
+               Finish it_qhqce
+it_dhfzn = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_dhfzn
