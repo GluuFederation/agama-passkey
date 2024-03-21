@@ -339,8 +339,8 @@
 			"height": 124,
 			"id": "finish-b0459236-3083-40d4-9892-2a5ff3bc7a94",
 			"position": {
-				"x": 1480,
-				"y": 27
+				"x": 1550.9807847767834,
+				"y": 28.43395524801582
 			},
 			"type": "finish",
 			"data": {
@@ -354,8 +354,8 @@
 					"Agama-repeat-Node-e9662d07-f37f-45fe-a764-9c29d1e9cd43.InRepeatBlock"
 				],
 				"position": {
-					"x": 1480,
-					"y": 27
+					"x": 1550.9807847767834,
+					"y": 28.43395524801582
 				},
 				"agamaData": {
 					"id": "finish-b0459236-3083-40d4-9892-2a5ff3bc7a94",
@@ -369,14 +369,15 @@
 					"returnVariable": "Passkey registration attempt exceeded",
 					"finishMode": "withFailure",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
-					"displayName": "Response  error attempt exceeded"
+					"displayName": "Response  error attempt exceeded",
+					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
-				"x": 1480,
-				"y": 27
+				"x": 1550.9807847767834,
+				"y": 28.43395524801582
 			},
 			"dragging": false
 		},
@@ -964,8 +965,8 @@
 					"parentId": "Agama-assignment-Node-7f3fcf18-ea17-4e81-aa51-6fbf89b15285",
 					"type": "Agama-repeat-Node",
 					"nodeIcon": "material-symbols:event-repeat-outline-rounded",
-					"maxIteration": "50",
-					"displayName": "Repeat 50 times",
+					"maxIteration": "10",
+					"displayName": "Repeat 10 times",
 					"hasComment": true,
 					"hasNoRepeat": true
 				},
@@ -1003,7 +1004,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "Declare obj",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Declare the variable \"obj\" that contains the data for this flow",
 					"whenCondition": "",
 					"inRepeatBlock": false,
 					"assignments": [
@@ -1017,7 +1018,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 1029,
@@ -2483,8 +2484,8 @@
 		}
 	],
 	"viewport": {
-		"x": -499.1331520492977,
-		"y": 101.30802946218819,
+		"x": -1365.1331520492972,
+		"y": 52.308029462188244,
 		"zoom": 1.394743666350406
 	}
 }
