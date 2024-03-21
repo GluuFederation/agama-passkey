@@ -364,7 +364,7 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "End flow with error because it has exceeded the limit of attempts.",
 					"flowfilename": "",
 					"returnVariable": "Passkey registration attempt exceeded",
 					"finishMode": "withFailure",
@@ -2484,8 +2484,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1365.1331520492972,
-		"y": 52.308029462188244,
-		"zoom": 1.394743666350406
+		"x": -1216.143387808844,
+		"y": 76.97274598975525,
+		"zoom": 1.180992661429531
 	}
 }
