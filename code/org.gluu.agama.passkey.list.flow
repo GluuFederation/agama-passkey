@@ -58,7 +58,8 @@ Repeat 10 times max
                obj.errorMessage = E.message
                obj.isAssertion = false
           When E is null
-               it_qhqce = {success:true, data: { userId: inum }}
-               Finish it_qhqce
-it_dhfzn = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_dhfzn
+               it_ywjit = {success:true, data: { userId: inum }}
+               Finish it_ywjit
+// End flow with error because it has exceeded the limit of attempts.
+it_aotxe = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_aotxe
