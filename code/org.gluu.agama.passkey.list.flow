@@ -1,10 +1,15 @@
+// Flow responsible for managing your passkeys and login with passkey
 Flow org.gluu.agama.passkey.list
      Basepath ""
      Inputs userData scimSetting
+// Declaration of uid and inum taken from userData
 inum = userData.inum
 uid = userData.uid
+// Get Instance FidoValidator
 fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+// Get Instance ScimFido2Helper
 scimFido2Helper = Call org.gluu.agama.passkey.ScimFido2Helper#new scimSetting
+// Passkey list by user's inum
 fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
 obj = { fidoDevice: fidoDevice, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "", canEdit: false }
 Repeat 50 times max
@@ -52,7 +57,7 @@ Repeat 50 times max
                obj.errorMessage = E.message
                obj.isAssertion = false
           When E is null
-               it_epblz = {success:true, data: { userId: inum }}
-               Finish it_epblz
-it_jqsex = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_jqsex
+               it_ndijd = {success:true, data: { userId: inum }}
+               Finish it_ndijd
+it_bktxa = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_bktxa
