@@ -57,10 +57,10 @@ Repeat 10 times max
                obj.showError = true
                obj.isAssertion = false
                obj.errorTitle = "Passkey authentication failed."
-               obj,errorMessage = "E.message"
+               obj,errorMessage = E.message
           When E is null
-               it_xkbmb = {success:true, data: { userId: inum }}
-               Finish it_xkbmb
+               it_svfua = {success:true, data: { userId: inum }}
+               Finish it_svfua
 // End flow with error because it has exceeded the limit of attempts.
-it_jsmqy = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_jsmqy
+it_yxgmq = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_yxgmq
