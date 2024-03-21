@@ -55,12 +55,12 @@ Repeat 10 times max
           verifyResponse | E = Call fidoValidator verify listForm.tokenResponse
           When E is not null
                obj.showError = true
-               obj.errorTitle = "Passkey authentication failed."
-               obj.errorMessage = E.message
                obj.isAssertion = false
+               obj.errorTitle = "Passkey authentication failed."
+               obj,errorMessage = "E.message"
           When E is null
-               it_kjbbt = {success:true, data: { userId: inum }}
-               Finish it_kjbbt
+               it_xkbmb = {success:true, data: { userId: inum }}
+               Finish it_xkbmb
 // End flow with error because it has exceeded the limit of attempts.
-it_ujvln = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_ujvln
+it_jsmqy = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_jsmqy
