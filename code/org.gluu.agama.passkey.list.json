@@ -144,7 +144,7 @@
 						{
 							"variableTypeCheck": false,
 							"assignmentExpression": "E.message",
-							"assignedVariableName": "obj,errorMessage"
+							"assignedVariableName": "obj.errorMessage"
 						}
 					],
 					"nodeIcon": "material-symbols:equal"
