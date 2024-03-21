@@ -36,9 +36,10 @@
 					"returnVariable": "{ userId: inum }",
 					"finishMode": "withSuccess",
 					"nodeIcon": "material-symbols:line-end-square-rounded"
-				}
+				},
+				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 4673.846436626904,
 				"y": 752.9030326977505
@@ -84,7 +85,8 @@
 				"handles": [
 					"Agama-when-Node-9c78aab0-3b60-40a8-99ee-1250af47a24b.FAILURE",
 					"Agama-when-Node-9c78aab0-3b60-40a8-99ee-1250af47a24b.SUCCESS"
-				]
+				],
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -140,15 +142,16 @@
 							"assignedVariableName": "obj.errorTitle"
 						},
 						{
-							"variableTypeCheck": true,
+							"variableTypeCheck": false,
 							"assignmentExpression": "E.message",
 							"assignedVariableName": "obj,errorMessage"
 						}
 					],
 					"nodeIcon": "material-symbols:equal"
-				}
+				},
+				"skake": true
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 4330.167349470747,
 				"y": 763.5711856205586
@@ -2029,7 +2032,8 @@
 				"handles": [
 					"Agama-when-Node-5c9abd3e-baee-4ebd-9e80-d815071e38b6.FAILURE",
 					"Agama-when-Node-5c9abd3e-baee-4ebd-9e80-d815071e38b6.SUCCESS"
-				]
+				],
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
