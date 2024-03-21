@@ -59,8 +59,8 @@ Repeat 10 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_bpynk = {success:true, data: { userId: inum }}
-               Finish it_bpynk
+               it_smehh = {success:true, data: { userId: inum }}
+               Finish it_smehh
 // End flow with error because it has exceeded the limit of attempts.
-it_jrufo = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_jrufo
+it_fuslh = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_fuslh
