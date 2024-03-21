@@ -43,7 +43,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2564.95538382441,
 				"y": 915.9972759293865
@@ -1017,7 +1017,7 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 1029,
@@ -1049,7 +1049,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Get fido devices by user",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Passkey list by user's inum",
 					"javaClassName": "",
 					"javaMethodName": "getFidoDeviceByUser",
 					"javaVariableName": "scimFido2Helper",
@@ -1097,7 +1097,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "ScimFido2Helper instance",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Get Instance ScimFido2Helper",
 					"javaClassName": "org.gluu.agama.passkey.ScimFido2Helper",
 					"javaMethodName": "",
 					"javaVariableName": "",
@@ -1105,7 +1105,9 @@
 					"callType": "Create an instance",
 					"whenCondition": "",
 					"inRepeatBlock": false,
-					"arguments": "scimSetting",
+					"arguments": [
+						"scimSetting"
+					],
 					"nodeIcon": "material-symbols:code",
 					"asssignedVariableName": "scimFido2Helper"
 				},
@@ -1143,7 +1145,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "FidoValidator instance",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Get Instance FidoValidator",
 					"javaClassName": "org.gluu.agama.passkey.authn.FidoValidator",
 					"javaMethodName": "",
 					"javaVariableName": "",
@@ -1169,7 +1171,7 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-7f9fc2f6-5137-4bb3-acee-421851b701e2",
 			"position": {
-				"x": 229,
+				"x": 232,
 				"y": 30
 			},
 			"type": "assignment",
@@ -1180,7 +1182,7 @@
 				"whenCondition": "",
 				"inRepeatBlock": false,
 				"position": {
-					"x": 229,
+					"x": 232,
 					"y": 30
 				},
 				"agamaData": {
@@ -1189,7 +1191,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Declaration of uid and inum taken from userData",
 					"whenCondition": "",
 					"inRepeatBlock": false,
 					"assignments": [
@@ -1211,7 +1213,7 @@
 			"selected": false,
 			"dragging": false,
 			"positionAbsolute": {
-				"x": 229,
+				"x": 232,
 				"y": 30
 			}
 		},
@@ -1234,7 +1236,7 @@
 					"type": "Agama-start-Flow",
 					"displayName": "Passkey List",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Flow responsible for managing your passkeys and login with passkey",
 					"isTopLevelFlow": true,
 					"basepath": "",
 					"configParams": "{}",
@@ -2481,8 +2483,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1645,
-		"y": -428,
-		"zoom": 1
+		"x": -499.1331520492977,
+		"y": 101.30802946218819,
+		"zoom": 1.394743666350406
 	}
 }
