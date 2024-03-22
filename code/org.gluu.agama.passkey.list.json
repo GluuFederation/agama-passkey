@@ -541,11 +541,12 @@
 							"assignedVariableName": "obj.errorMessage"
 						}
 					],
-					"nodeIcon": "material-symbols:equal"
+					"nodeIcon": "material-symbols:equal",
+					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 2976.879253496648,
 				"y": 888.9931849044398
@@ -1178,7 +1179,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 3453.3442026449625,
 				"y": 484.07516791156525
@@ -2769,8 +2770,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1856.3290319316561,
-		"y": -258.17362409399425,
+		"x": -2550.329031931656,
+		"y": -199.17362409399425,
 		"zoom": 0.8235910172675747
 	}
 }
