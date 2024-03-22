@@ -16,7 +16,8 @@
 				"position": {
 					"x": 2790.091688160992,
 					"y": 683.582896582299
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -41,7 +42,8 @@
 				"position": {
 					"x": 2439.5112989826894,
 					"y": 674.3298721423946
-				}
+				},
+				"skake": false
 			},
 			"selected": false,
 			"positionAbsolute": {
@@ -433,7 +435,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2661.7967820616313,
 				"y": 889.455328912774
@@ -634,7 +636,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Hide all processes (authentication and error message)",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": false,
 					"inIterateBlock": false,
@@ -671,8 +673,8 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-e4d3b6b1-d8fa-4513-80fb-f87055fba7d8",
 			"position": {
-				"x": 2465.8432837124146,
-				"y": 496.67503498025917
+				"x": 2464.9727331491185,
+				"y": 495.80448441696296
 			},
 			"type": "assignment",
 			"data": {
@@ -683,8 +685,8 @@
 				"inRepeatBlock": false,
 				"inIterateBlock": false,
 				"position": {
-					"x": 2465.8432837124146,
-					"y": 496.67503498025917
+					"x": 2464.9727331491185,
+					"y": 495.80448441696296
 				},
 				"agamaData": {
 					"id": "Agama-assignment-Node-e4d3b6b1-d8fa-4513-80fb-f87055fba7d8",
@@ -692,7 +694,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Enables the input to modify the passkey nickname",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": false,
 					"inIterateBlock": false,
@@ -719,8 +721,8 @@
 			},
 			"selected": false,
 			"positionAbsolute": {
-				"x": 2465.8432837124146,
-				"y": 496.67503498025917
+				"x": 2464.9727331491185,
+				"y": 495.80448441696296
 			},
 			"dragging": false
 		},
@@ -953,11 +955,12 @@
 						"userData"
 					],
 					"asssignedVariableName": "addTrigger",
-					"exceptionVariableField": ""
+					"exceptionVariableField": "",
+					"nodeColor": "#80deea"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 2804.780808823725,
 				"y": 496.9519671182617
@@ -2713,8 +2716,8 @@
 		}
 	],
 	"viewport": {
-		"x": -2176.676063606147,
-		"y": -650.7344360279835,
+		"x": -2349.6760636061463,
+		"y": -528.7344360279837,
 		"zoom": 1.148698354997036
 	}
 }
