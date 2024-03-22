@@ -946,7 +946,7 @@
 					"type": "Agama-trigger-Node",
 					"displayName": "Passkey add flow",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Passkey registration flow",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": true,
 					"nodeIcon": "fluent-mdl2:trigger-approval",
@@ -2716,8 +2716,8 @@
 		}
 	],
 	"viewport": {
-		"x": -2349.6760636061463,
-		"y": -528.7344360279837,
-		"zoom": 1.148698354997036
+		"x": -1954,
+		"y": -369,
+		"zoom": 1
 	}
 }
