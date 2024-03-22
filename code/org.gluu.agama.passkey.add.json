@@ -558,7 +558,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 3302.84139737471,
 				"y": 286.07357548122695
@@ -619,8 +619,8 @@
 			"height": 124,
 			"id": "finish-56b9136c-5cdc-4ef4-8943-92479fe7d895",
 			"position": {
-				"x": 2824.3665260302632,
-				"y": 34.13464683370222
+				"x": 2830.3665260302632,
+				"y": 36.13464683370225
 			},
 			"type": "finish",
 			"data": {
@@ -634,8 +634,8 @@
 					"Agama-when-Node-0b0ddd5b-abf4-40c7-8ae6-7ed797b6e79e.SUCCESS"
 				],
 				"position": {
-					"x": 2824.3665260302632,
-					"y": 34.13464683370222
+					"x": 2830.3665260302632,
+					"y": 36.13464683370225
 				},
 				"agamaData": {
 					"id": "finish-56b9136c-5cdc-4ef4-8943-92479fe7d895",
@@ -644,20 +644,20 @@
 					"hasSuccess": false,
 					"hasFailure": false,
 					"hasComment": true,
-					"comment": "",
+					"comment": "Ends the flow because the user cancels it",
 					"flowfilename": "",
 					"returnVariable": "Cancel event",
 					"finishMode": "withFailure",
 					"nodeIcon": "material-symbols:line-end-square-rounded",
-					"displayName": "Response error with cancel event",
+					"displayName": "",
 					"nodeColor": "#eb999a"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
-				"x": 2824.3665260302632,
-				"y": 34.13464683370222
+				"x": 2830.3665260302632,
+				"y": 36.13464683370225
 			},
 			"dragging": false
 		},
@@ -1705,8 +1705,8 @@
 		}
 	],
 	"viewport": {
-		"x": -391.49122191619335,
-		"y": 100.99961101802694,
-		"zoom": 0.5
+		"x": -2114,
+		"y": 79.60000000000002,
+		"zoom": 1
 	}
 }
