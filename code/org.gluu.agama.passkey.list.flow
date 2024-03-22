@@ -44,9 +44,11 @@ Repeat 10 times max
      When listForm.addAPasskeyBtn is ""
           // Passkey registration flow
           addTrigger = Trigger org.gluu.agama.passkey.add userData
+          // Hide all processes (authentication and error message)
           obj.showError = false
           obj.isAssertion = false
           When addTrigger.success is true
+               // Reload the passkeys list
                obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
      When listForm.loginWithPasskeyBtn is ""
           // Method for generating a passkey authentication request
@@ -56,20 +58,24 @@ Repeat 10 times max
           obj.isAssertion = true
           obj.assertion = detestable
      When listForm.skipped is "skipped"
+          // Show authentication process cancellation error
           obj.isAssertion = false
           obj.showError = true
           obj.errorTitle = "Passkey authentication failed."
           obj.errorMessage = listForm.errorMessage
      When listForm.tokenResponse is not "" and listForm.tokenResponse is not null
+          // Call the method to verify authentication with the passkey
           verifyResponse | E = Call fidoValidator verify listForm.tokenResponse
           When E is not null
+               // Show verification errors with their details
                obj.showError = true
                obj.isAssertion = false
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_qfqtb = {success:true, data: { userId: inum }}
-               Finish it_qfqtb
+               // Ends the flow and returns the user's inum
+               it_mhysu = {success:true, data: { userId: inum }}
+               Finish it_mhysu
 // End flow with error because it has exceeded the limit of attempts.
-it_hbjvx = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_hbjvx
+it_qilwd = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_qilwd
