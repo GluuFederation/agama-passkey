@@ -15,7 +15,7 @@ When a main flow of this project is launched (namely `org.gluu.agama.passkey.mai
 redirected to a view where he/she must first enter your username and password, then show a list of passkeys that you have
 registered, in case you do not have one you must register one, once you have registered your passkey you can complete
 the authentication step with passkey.
-But you can also log in from the initial screen without entering a c redential.
+But you can also log in from the initial screen without entering a credential.
 
 ## Project Deployment
 
@@ -23,61 +23,88 @@ To deploy this project we need to meet the requirements.
 
 ### Requirements
 
-1. Running instance of `Jans Auth Server`, `Jans Fido2`, `Jans Casa` and `Jans Scim`
+1. Running instance of
+   - `Jans Auth Server`
+   - `Jans Fido2`
+   - `Jans Casa`
+   - `Jans Scim`
 
 ### Add Java dependencies
 
-1. Download
-   latest [agama-passkey-custom.jar](https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey-custom.jar)
-   from [Releases](https://github.com/GluuFederation/agama-passkey/releases)
-2. `scp` the jar file to `/opt/jans/jetty/jans-auth/custom/libs/` on Auth Server
-3. On Auth Server, edit `/opt/jans/jetty/jans-auth/webapps/jans-auth.xml` and
-   add the jar file to the `<set name="extractClasspath">...</Set>` element. For example:
-
-```
-<Configure class="org.eclipse.jetty.webapp.WebAppContext">
-   <Set name="contextPath">/jans-auth</Set>
-   <Set name="war">
-       <Property name="jetty.webapps" default="." />/jans-auth.war
-   </Set>
-   <Set name="extractWAR">true</Set>
-   <Set name="extraClasspath">
-      ...
-      /opt/jans/jetty/jans-auth/custom/libs/agama-passkey-custom.jar,
-      ...
-   </Set>
- </Configure>
-```
-
-4. Restart Auth Server to load the new jar:
-
-```
-systemctl restart jans-auth
-````
+1. cd /opt/jans/jetty/jans-auth/custom/libs
+2. wget https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey-custom.jar
+3. If you are not using *.jar, update extractClasspath in /opt/jans/jetty/jans-auth/webapps/jans-auth.xml
+4. Restart server
 
 ### Deployment
 
-Download the
-latest [agama-passkey.gama](https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey.gama)
-file and deploy it in Auth Sever.
+Run these instructions on the server where you have `Janssen` or `Gluu` installed:
 
-Follow the steps below:
-
-- Copy (SCP/SFTP) the gama file of this project to a location in your `Jans Server`
-- Connect (SSH) to your `Jans Server` and open TUI: `python3 /opt/jans/jans-cli/jans_cli_tui.py`
-- Navigate to the `Agama` tab and then select `"Upload project"`. Choose the gama file
-- Wait for about one minute and then select the row in the table corresponding to this project
-- Press `d` and ensure there were not deployment errors
-- Pres `ESC` to close the dialog
+- Download the
+  latest [agama-passkey.gama](https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey.gama), you can use `wget`
+```shell
+wget https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey.gama
+```
 
 ![TUI_AGAMA_DEPLOY](https://github.com/GluuFederation/agama-passkey/assets/86965029/1d6b8cab-ddad-451c-b620-d19be1b7f9e3)
 
 ### Configure Jans Scim
 
-- Once we have deployed the `agama project`, we need to configure the `jans scim` parameters, then we proceed to create a new user `jans scim` with scope `https://jans.io/scim/fido2.read` and `https://jans.io/scim/fido2.write`.
-- Now that we have the jans scim client, we proceed to configure this client using TUI.
-- We open TUI and we are located in agama, we select in the table where our application is deployed and press `c`, this will open a configuration panel, where we must first hit `Export Sample Config` and save the file in some path.
+- Once we have deployed the `agama project`, we need to configure the `jans scim` parameters, then we proceed to create
+  a new client `jans scim` with scope `https://jans.io/scim/fido2.read` and `https://jans.io/scim/fido2.write`.
+
+You can create the client using the registration web service.
+
+**Request**
+
+```
+curl --location 'https://<YOUR_DOMAIN>/jans-auth/restv1/register' \
+--header 'Content-Type: application/json' \
+--data '{
+  "client_name": "SCIM Agama Client",
+  "scope": [
+    "https://jans.io/scim/fido2.read",
+    "https://jans.io/scim/fido2.write"
+  ],
+  "grant_types": [
+    "client_credentials"
+  ],
+  "token_endpoint_auth_method": "client_secret_basic"
+}'
+```
+
+**Response**
+
+```
+{
+  "allow_spontaneous_scopes": false,
+  "application_type": "web",
+  "rpt_as_jwt": false,
+  "registration_client_uri": "https://<YOUR_DOMAIN>/jans-auth/restv1/register?client_id=27975f1c-eee6-4bf8-b393-5fb47d44c566",
+  "tls_client_auth_subject_dn": "",
+  "run_introspection_script_before_jwt_creation": false,
+  "registration_access_token": "<YOUR_REGISTRATION_ACCESS_TOKEN>",
+  "client_id": "<YOUR_CLIENT_ID>",
+  "client_secret": "<YOUR_SECRET_KEY>",
+  "token_endpoint_auth_method": "client_secret_basic",
+  "scope": "https://jans.io/scim/fido2.read https://jans.io/scim/fido2.write",
+  "client_id_issued_at": 1710469308,
+  "backchannel_logout_session_required": false,
+  "client_name": "Scim custom client",
+  "par_lifetime": 600,
+  "spontaneous_scopes": [],
+  "id_token_signed_response_alg": "RS256",
+  ...,
+  ...,
+  ...
+}
+```
+
+- Now that we have the jans scim client, we proceed to configure this client using `TUI`.
+- We open `TUI` and we are located in agama, we select in the table where our application is deployed and press `c`, this
+  will open a configuration panel, where we must first hit `Export Sample Config` and save the file in some path.
 - Now we go to the exported file and edit it and enter the credentials
+
 
 ```
 {
@@ -101,7 +128,7 @@ Follow the steps below:
 You'll need an OpenID Connect test RP. You can try [oidcdebugger](https://oidcdebugger.com/),
 [jans-tarp](https://github.com/JanssenProject/jans/tree/main/demos/jans-tarp)
 or [jans-tent](https://github.com/JanssenProject/jans/tree/main/demos/jans-tent). Check out this video to see an example
-of **agama-passkey** in action:
+of **agama-passkey** in action:v
 
 ### Use case 1:
 

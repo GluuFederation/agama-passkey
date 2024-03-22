@@ -1,35 +1,50 @@
+// Flow that takes care of registering a new Passkey
 Flow org.gluu.agama.passkey.add
      Basepath ""
      Inputs userData
+// Set "inum" obtained from userData
 inum = userData.inum
+// Get Instance FidoEnroller
 fidoEnroller = Call org.gluu.agama.passkey.enroll.FidoEnroller#new 
+// Declaration of the variable "obj" with initial data
 obj = { attestation: "{}", isAttestation: false, showError: false, errorTitle: "", errorMessage: "" }
-Repeat 50 times max
+Repeat 5 times max
+     // Load passkey-add.ftlh page
      addDeviceForm = RRF "passkey-add.ftlh" obj
      When addDeviceForm.addPasskeyBtn is ""
+          // Invoke the method to initiate passkey registration
           detestable = Call fidoEnroller getAttestationMessage inum
+          // Show registration flow
           obj.isAttestation = true
           obj.attestation = detestable
           obj.showError = false
      When addDeviceForm.skipped is "skipped"
+          // Process cancellation error displayed
           obj.isAttestation = false
           obj.showError = true
           obj.errorTitle = "Passkey registration failed."
           obj.errorMessage = addDeviceForm.errorMessage
      When addDeviceForm.tokenResponse is not ""
+          // Invoke method to verify passkey registration
           key | E = Call fidoEnroller verifyRegistration inum addDeviceForm.tokenResponse
           When E is null and key is not null
+               // Flow to assign a nickname to the registered passkey
                nicknameTrigger = Trigger org.gluu.agama.passkey.nickname key userData
+               // If there is an active registration flow, it will be canceled
                obj.isAttestation = false
-               it_lyocp = {success:true, data: { userId: inum, response: nicknameTrigger }}
-               Finish it_lyocp
+               // Ends the flow by replying to the user's inum
+               it_iqybp = {success:true, data: { userId: inum, response: nicknameTrigger }}
+               Finish it_iqybp
           When E is not null
+               // Show error with detail obtained from verify method
                obj.isAttestation = false
                obj.showError = true
                obj.errorTitle = "Passkey registration failed."
                obj.errorMessage = E.message
      When addDeviceForm.cancelBtn is ""
-          it_bksml = {success:false, error: "Cancel event"}
-          Finish it_bksml
-it_zodfn = {success:false, error: "Passkey registration attempt exceeded."}
-Finish it_zodfn
+          // Ends the flow because the user cancels it
+          it_chvmt = {success:false, error: "Cancel event"}
+          Finish it_chvmt
+// Finish with error, because the limit of attempts was exceeded.
+it_vydgh = {success:false, error: "Passkey registration attempt exceeded."}
+Finish it_vydgh

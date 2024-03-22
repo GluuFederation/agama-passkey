@@ -1,12 +1,19 @@
+// This flow is responsible for establishing a nickname for the FIDO device, which is correctly registered.
 Flow org.gluu.agama.passkey.nickname
      Basepath ""
      Inputs key userData
+// Set inum of userData
 inum = userData.inum
+// Load nickname.ftlh page
 nicknameForm = RRF "nickname.ftlh" 
+//  Get Instance FidoEnroller
 fidoEnroller = Call org.gluu.agama.passkey.enroll.FidoEnroller#new 
+// Invoke the method to save the nickname
 nickNamed = Call fidoEnroller nameIt inum nicknameForm.nickname key
 When nickNamed is false
-     it_prlmb = {success:false, error: "Nickname passkey failed to save"}
-     Finish it_prlmb
-it_xcwsi = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
-Finish it_xcwsi
+     // Ends the flow by responding error
+     it_pnlpv = {success:false, error: "Nickname passkey failed to save"}
+     Finish it_pnlpv
+// Successfully completes the flow
+it_qopdn = {success:true, data: { userId: inum, message: "Nickname passkey saved"}}
+Finish it_qopdn

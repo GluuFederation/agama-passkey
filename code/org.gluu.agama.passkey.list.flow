@@ -1,58 +1,81 @@
+// Flow responsible for managing your passkeys and login with passkey
 Flow org.gluu.agama.passkey.list
      Basepath ""
      Inputs userData scimSetting
+// Declaration of uid and inum taken from userData
 inum = userData.inum
 uid = userData.uid
+// Get Instance FidoValidator
 fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+// Get Instance ScimFido2Helper
 scimFido2Helper = Call org.gluu.agama.passkey.ScimFido2Helper#new scimSetting
+// Passkey list by user's inum
 fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
+// Declare the variable "obj" that contains the data for this flow
 obj = { fidoDevice: fidoDevice, assertion: "{}", isAssertion: false, showError: false, errorTitle: "", errorMessage: "", canEdit: false }
-Repeat 50 times max
+Repeat 10 times max
+     // Load passkey-list.ftlh page
      listForm = RRF "passkey-list.ftlh" obj
      When listForm.deviceId is not ""
+          // Hide all processes (authentication and error message)
           obj.canEdit = false
           obj.isAssertion = false
           obj.showError = false
+          // Call the passkey update method
           nickNamed | E = Call scimFido2Helper updateDevice inum listForm.deviceId listForm.nickname
           When E is null
+               // Reload the passkey list
                obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
           When E is not null
+               // Show authentication process cancellation error
                obj.showError = false
                obj.errorTitle = "Passkey failed to set a new nickname"
                obj.errorMessage = E.message
      When listForm.cancelItemBtn is ""
+          // Hide all processes (authentication and error message)
           obj.canEdit = false
           obj.isAssertion = false
           obj.showError = false
      When listForm.editItemBtn is ""
+          // Enables the input to modify the passkey nickname
           obj.canEdit = true
           obj.isAssertion = false
           obj.showError = false
      When listForm.addAPasskeyBtn is ""
+          // Passkey registration flow
           addTrigger = Trigger org.gluu.agama.passkey.add userData
+          // Hide all processes (authentication and error message)
           obj.showError = false
           obj.isAssertion = false
           When addTrigger.success is true
+               // Reload the passkeys list
                obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
      When listForm.loginWithPasskeyBtn is ""
+          // Method for generating a passkey authentication request
           detestable = Call fidoValidator assertionRequest uid
+          // Show authentication process with passkey
           obj.showError = false
           obj.isAssertion = true
           obj.assertion = detestable
      When listForm.skipped is "skipped"
+          // Show authentication process cancellation error
           obj.isAssertion = false
           obj.showError = true
           obj.errorTitle = "Passkey authentication failed."
           obj.errorMessage = listForm.errorMessage
      When listForm.tokenResponse is not "" and listForm.tokenResponse is not null
+          // Call the method to verify authentication with the passkey
           verifyResponse | E = Call fidoValidator verify listForm.tokenResponse
           When E is not null
+               // Show verification errors with their details
                obj.showError = true
+               obj.isAssertion = false
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
-               obj.isAssertion = false
           When E is null
-               it_epblz = {success:true, data: { userId: inum }}
-               Finish it_epblz
-it_jqsex = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_jqsex
+               // Ends the flow and returns the user's inum
+               it_ufjre = {success:true, data: { userId: inum }}
+               Finish it_ufjre
+// End flow with error because it has exceeded the limit of attempts.
+it_dknvi = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_dknvi
