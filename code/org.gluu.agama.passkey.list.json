@@ -1,6 +1,56 @@
 {
 	"nodes": [
 		{
+			"width": 234,
+			"height": 30,
+			"id": "Agama-note-adb7e293-8bef-44a8-8c32-203f01cbc4d7",
+			"position": {
+				"x": 2790.091688160992,
+				"y": 683.582896582299
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-adb7e293-8bef-44a8-8c32-203f01cbc4d7",
+				"type": "Agama-note",
+				"notes": "If the passkey update failed",
+				"position": {
+					"x": 2790.091688160992,
+					"y": 683.582896582299
+				}
+			},
+			"selected": false,
+			"positionAbsolute": {
+				"x": 2790.091688160992,
+				"y": 683.582896582299
+			},
+			"dragging": false
+		},
+		{
+			"width": 270,
+			"height": 42,
+			"id": "Agama-note-da50b5d4-d579-45eb-91db-29359bd5a4c8",
+			"position": {
+				"x": 2439.5112989826894,
+				"y": 674.3298721423946
+			},
+			"type": "notes",
+			"data": {
+				"id": "Agama-note-da50b5d4-d579-45eb-91db-29359bd5a4c8",
+				"type": "Agama-note",
+				"notes": "If the passkey update is successful",
+				"position": {
+					"x": 2439.5112989826894,
+					"y": 674.3298721423946
+				}
+			},
+			"selected": false,
+			"positionAbsolute": {
+				"x": 2439.5112989826894,
+				"y": 674.3298721423946
+			},
+			"dragging": false
+		},
+		{
 			"width": 170,
 			"height": 124,
 			"id": "finish-775d6567-2d61-4a88-9412-d4f3df062202",
@@ -346,7 +396,7 @@
 			"id": "Agama-call-Node-57260680-3c35-4170-88a1-4922d8e4369b",
 			"position": {
 				"x": 2661.7967820616313,
-				"y": 891.1964300393662
+				"y": 889.455328912774
 			},
 			"type": "call",
 			"data": {
@@ -358,7 +408,7 @@
 				"inIterateBlock": false,
 				"position": {
 					"x": 2661.7967820616313,
-					"y": 891.1964300393662
+					"y": 889.455328912774
 				},
 				"agamaData": {
 					"id": "Agama-call-Node-57260680-3c35-4170-88a1-4922d8e4369b",
@@ -366,7 +416,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Reload all devices by user",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Reload the passkey list",
 					"javaClassName": "",
 					"javaMethodName": "getFidoDeviceByUser",
 					"javaVariableName": "scimFido2Helper",
@@ -383,10 +433,10 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
 				"x": 2661.7967820616313,
-				"y": 891.1964300393662
+				"y": 889.455328912774
 			},
 			"dragging": false
 		},
@@ -416,7 +466,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Show authentication process cancellation error",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": false,
 					"inIterateBlock": false,
@@ -472,9 +522,9 @@
 					"id": "Agama-call-Node-668d617c-b558-4979-b8ad-625daac60b17",
 					"parentId": "Agama-assignment-Node-a49ce286-d0ef-4070-903f-43aff111c091",
 					"type": "Agama-call-Node",
-					"displayName": "Update device",
+					"displayName": "Update passkey",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Call the passkey update method",
 					"javaClassName": "",
 					"javaMethodName": "updateDevice",
 					"javaVariableName": "scimFido2Helper",
@@ -526,7 +576,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Hide all processes (authentication and error message)",
 					"whenCondition": "WhenTrue",
 					"inRepeatBlock": false,
 					"inIterateBlock": false,
@@ -762,7 +812,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 3691.268282920075,
 				"y": 915.1286127123672
@@ -2663,8 +2713,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1088.7524182250572,
-		"y": -107.29141384760203,
-		"zoom": 0.5
+		"x": -2176.676063606147,
+		"y": -650.7344360279835,
+		"zoom": 1.148698354997036
 	}
 }
