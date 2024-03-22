@@ -17,13 +17,17 @@ Repeat 10 times max
      // Load passkey-list.ftlh page
      listForm = RRF "passkey-list.ftlh" obj
      When listForm.deviceId is not ""
+          // Hide all processes (authentication and error message)
           obj.canEdit = false
           obj.isAssertion = false
           obj.showError = false
+          // Call the passkey update method
           nickNamed | E = Call scimFido2Helper updateDevice inum listForm.deviceId listForm.nickname
           When E is null
+               // Reload the passkey list
                obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
           When E is not null
+               // Show authentication process cancellation error
                obj.showError = false
                obj.errorTitle = "Passkey failed to set a new nickname"
                obj.errorMessage = E.message
@@ -59,8 +63,8 @@ Repeat 10 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_smehh = {success:true, data: { userId: inum }}
-               Finish it_smehh
+               it_yvztd = {success:true, data: { userId: inum }}
+               Finish it_yvztd
 // End flow with error because it has exceeded the limit of attempts.
-it_fuslh = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_fuslh
+it_dtpru = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_dtpru
