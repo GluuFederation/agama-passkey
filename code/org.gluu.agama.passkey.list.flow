@@ -42,6 +42,7 @@ Repeat 10 times max
           obj.isAssertion = false
           obj.showError = false
      When listForm.addAPasskeyBtn is ""
+          // Passkey registration flow
           addTrigger = Trigger org.gluu.agama.passkey.add userData
           obj.showError = false
           obj.isAssertion = false
@@ -65,8 +66,8 @@ Repeat 10 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_gytld = {success:true, data: { userId: inum }}
-               Finish it_gytld
+               it_ardqy = {success:true, data: { userId: inum }}
+               Finish it_ardqy
 // End flow with error because it has exceeded the limit of attempts.
-it_npgvu = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_npgvu
+it_gxvrp = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_gxvrp
