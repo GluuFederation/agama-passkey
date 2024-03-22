@@ -32,10 +32,12 @@ Repeat 10 times max
                obj.errorTitle = "Passkey failed to set a new nickname"
                obj.errorMessage = E.message
      When listForm.cancelItemBtn is ""
+          // Hide all processes (authentication and error message)
           obj.canEdit = false
           obj.isAssertion = false
           obj.showError = false
      When listForm.editItemBtn is ""
+          // Enables the input to modify the passkey nickname
           obj.canEdit = true
           obj.isAssertion = false
           obj.showError = false
@@ -63,8 +65,8 @@ Repeat 10 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_yvztd = {success:true, data: { userId: inum }}
-               Finish it_yvztd
+               it_gytld = {success:true, data: { userId: inum }}
+               Finish it_gytld
 // End flow with error because it has exceeded the limit of attempts.
-it_dtpru = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_dtpru
+it_npgvu = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_npgvu
