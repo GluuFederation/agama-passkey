@@ -49,7 +49,9 @@ Repeat 10 times max
           When addTrigger.success is true
                obj.fidoDevice = Call scimFido2Helper getFidoDeviceByUser inum
      When listForm.loginWithPasskeyBtn is ""
+          // Method for generating a passkey authentication request
           detestable = Call fidoValidator assertionRequest uid
+          // Show authentication process with passkey
           obj.showError = false
           obj.isAssertion = true
           obj.assertion = detestable
@@ -66,8 +68,8 @@ Repeat 10 times max
                obj.errorTitle = "Passkey authentication failed."
                obj.errorMessage = E.message
           When E is null
-               it_ardqy = {success:true, data: { userId: inum }}
-               Finish it_ardqy
+               it_qfqtb = {success:true, data: { userId: inum }}
+               Finish it_qfqtb
 // End flow with error because it has exceeded the limit of attempts.
-it_gxvrp = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_gxvrp
+it_hbjvx = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_hbjvx
