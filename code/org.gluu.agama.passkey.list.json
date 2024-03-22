@@ -960,7 +960,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2804.780808823725,
 				"y": 496.9519671182617
@@ -972,7 +972,7 @@
 			"height": 124,
 			"id": "Agama-assignment-Node-642689a4-66e6-4b5a-ad29-aaf82dee374b",
 			"position": {
-				"x": 3455.5386236357167,
+				"x": 3454.5386236357167,
 				"y": 637.9236175559594
 			},
 			"type": "assignment",
@@ -983,7 +983,7 @@
 				"whenCondition": "",
 				"inRepeatBlock": true,
 				"position": {
-					"x": 3455.5386236357167,
+					"x": 3454.5386236357167,
 					"y": 637.9236175559594
 				},
 				"agamaData": {
@@ -992,7 +992,7 @@
 					"type": "Agama-assignment-Node",
 					"displayName": "",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Show authentication process with passkey",
 					"whenCondition": "",
 					"inRepeatBlock": true,
 					"assignments": [
@@ -1016,9 +1016,9 @@
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"positionAbsolute": {
-				"x": 3455.5386236357167,
+				"x": 3454.5386236357167,
 				"y": 637.9236175559594
 			},
 			"dragging": false
@@ -1048,7 +1048,7 @@
 					"type": "Agama-call-Node",
 					"displayName": "Assertion request",
 					"hasComment": true,
-					"comment": "",
+					"comment": "Method for generating a passkey authentication request",
 					"javaClassName": "",
 					"javaMethodName": "assertionRequest",
 					"javaVariableName": "fidoValidator",
@@ -2716,8 +2716,8 @@
 		}
 	],
 	"viewport": {
-		"x": -1954,
-		"y": -369,
+		"x": -2690,
+		"y": -476,
 		"zoom": 1
 	}
 }
