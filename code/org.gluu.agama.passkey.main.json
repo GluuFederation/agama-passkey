@@ -844,7 +844,7 @@
 				},
 				"skake": false
 			},
-			"selected": true,
+			"selected": false,
 			"positionAbsolute": {
 				"x": 2504.963392144978,
 				"y": 449.50458946598746
@@ -1087,15 +1087,13 @@
 					"callType": "Create an instance",
 					"whenCondition": "",
 					"inRepeatBlock": false,
-					"arguments": [
-						"obj.isAssertion"
-					],
+					"arguments": [],
 					"nodeIcon": "material-symbols:code",
 					"asssignedVariableName": "fidoValidator"
 				},
 				"skake": false
 			},
-			"selected": false,
+			"selected": true,
 			"dragging": false,
 			"positionAbsolute": {
 				"x": 630,
@@ -2015,8 +2013,8 @@
 		}
 	],
 	"viewport": {
-		"x": -2046.6238654407089,
-		"y": -314.2309044650027,
-		"zoom": 1.1486983549970382
+		"x": -174,
+		"y": 24,
+		"zoom": 1
 	}
 }
