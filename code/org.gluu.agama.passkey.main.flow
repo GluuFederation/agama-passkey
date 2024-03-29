@@ -30,6 +30,7 @@ Repeat 5 times max
                     Finish it_zoswe
      When mainForm.loginWithPasskeyBtn is ""
           // Generates an assertion request without username
+
           detestable = Call fidoValidator assertionRequest null
           // Starts the authentication process
           obj.showError = false

@@ -7,7 +7,6 @@ import io.jans.casa.conf.OIDCClientSettings;
 import io.jans.casa.model.ApplicationConfiguration;
 import io.jans.orm.PersistenceEntryManager;
 import io.jans.service.cdi.util.CdiUtil;
-import io.jans.util.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

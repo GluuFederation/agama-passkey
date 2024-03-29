@@ -17,24 +17,16 @@ For more information you can also see
 
 ## Requirements
 
-* Register a client to integrate with SCIM, minimum scopes:
+* Register a client to integrate with SCIM (Used to list passkeys and edit), minimum scopes:
   - https://jans.io/scim/fido2.read
   - https://jans.io/scim/fido2.write
-* The following step is necessary because it adds a dependency to Jans in order for the project to work
-
-### Add Java dependencies
-
-1. cd /opt/jans/jetty/jans-auth/custom/libs
-2. wget https://github.com/GluuFederation/agama-passkey/releases/latest/download/agama-passkey-custom.jar
-3. If you are not using *.jar, update extractClasspath in /opt/jans/jetty/jans-auth/webapps/jans-auth.xml
-4. Restart server
 
 ## Supported IDPs
 
-| IDP              | Description                                                                                 |
-|:-----------------|:--------------------------------------------------------------------------------------------| 
-| Jans Auth Server | [Deployment instructions](https://gluu.org/agama/deploying-an-agama-project-to-jans-server) | 
-| Gluu Flex        | [Deployment instructions](https://gluu.org/agama/deploying-an-agama-project-to-jans-server) | 
+| IDP              | Description                                                         |
+|:-----------------|:--------------------------------------------------------------------| 
+| Jans Auth Server | [Deployment instructions](https://docs.jans.io/head/admin/install/) | 
+| Gluu Flex        | [Deployment instructions](https://docs.jans.io/head/admin/install/) | 
 
 ## Flows
 
