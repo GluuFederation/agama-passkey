@@ -25,7 +25,7 @@ For more information you can also see
 
 | IDP              | Description                                                         |
 |:-----------------|:--------------------------------------------------------------------| 
-| Jans Auth Server | [Deployment instructions](https://docs.jans.io/head/admin/install/) | 
+| Jans Auth Server | [Deployment instructions](jans-deploy.md)                           | 
 | Gluu Flex        | [Deployment instructions](https://docs.jans.io/head/admin/install/) | 
 
 ## Flows
