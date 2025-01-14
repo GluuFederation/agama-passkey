@@ -103,10 +103,10 @@ public class ScimWSBase {
         setTimeouts(request);
         request.setQuery(joiner.toString());
         request.setAuthorization(basicAuthnHeader);
-
+        log.debug ("request : " +request.getURI().toURL().toString());
         try {
             Map<String, Object> jobj = request.send().getContentAsJSONObject();
-
+            
             long exp = Long.parseLong(jobj.get("expires_in").toString()) * 1000;
             tokenExp = System.currentTimeMillis() + exp;
             token = jobj.get("access_token").toString();
