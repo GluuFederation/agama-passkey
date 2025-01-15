@@ -103,7 +103,7 @@ public class ScimWSBase {
         setTimeouts(request);
         request.setQuery(joiner.toString());
         request.setAuthorization(basicAuthnHeader);
-        log.debug ("request : " +request.getURI().toURL().toString());
+        log.info("request : " +request.getURI().toURL().toString());
         try {
             Map<String, Object> jobj = request.send().getContentAsJSONObject();
             
