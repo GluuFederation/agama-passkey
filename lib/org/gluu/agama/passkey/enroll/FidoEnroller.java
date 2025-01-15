@@ -56,7 +56,7 @@ public class FidoEnroller extends CasaWSBase {
             int status = response.getStatusCode();
             log.info("Status : "+status)
             Map<String, Object> map = response.getContentAsJSONObject();
-
+            log.info("Map: "+map)
             if (status != 201) {
                 log.error("Verification response was: ({}) {}", status, response.getContent());
                 throw new Exception(map.get("code").toString());
