@@ -2,6 +2,9 @@ package org.gluu.agama.passkey.authn;
 
 import io.jans.fido2.client.AssertionService;
 import io.jans.fido2.client.Fido2ClientFactory;
+
+import io.jans.fido2.model.assertion.AssertionOptions;
+
 import jakarta.ws.rs.core.Response;
 import net.minidev.json.JSONObject;
 import org.gluu.agama.passkey.NetworkUtils;
