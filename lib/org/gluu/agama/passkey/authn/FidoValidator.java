@@ -18,7 +18,7 @@ public class FidoValidator {
     private final String metadataConfiguration;
 
     public FidoValidator() throws IOException {
-        logger.debug("Inspecting fido2 configuration discovery URL");
+        logger.info("Inspecting fido2 configuration discovery URL");
         String metadataUri = NetworkUtils.urlBeforeContextPath() + "/.well-known/fido2-configuration";
 
         try (Response response = Fido2ClientFactory.instance().createMetaDataConfigurationService(metadataUri).getMetadataConfiguration()) {
@@ -34,7 +34,7 @@ public class FidoValidator {
     }
 
     public String assertionRequest(String uid) throws IOException {
-        logger.debug("Building an assertion request for {}", uid);
+        logger.info("Building an assertion request for {}", uid);
         // Using assertionService as a private class field gives serialization trouble...
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
         String content;
