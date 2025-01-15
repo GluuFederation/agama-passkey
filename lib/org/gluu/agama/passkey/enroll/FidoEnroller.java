@@ -52,7 +52,7 @@ public class FidoEnroller extends CasaWSBase {
                     new URL(getApiBase() + "/enrollment/fido2/registration/" + encode(id)));
             request.setQuery(tokenResponse);
 
-            log.info("Verifying registration");
+            log.info("Verifying registration : "+id +":"+ tokenResponse);
             HTTPResponse response = sendRequest(request, false, true);
             int status = response.getStatusCode();
             log.info("Status : "+status)
