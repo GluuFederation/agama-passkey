@@ -106,7 +106,7 @@ public class ScimWSBase {
         log.info("request : " +request.getURI().toURL().toString());
         try {
             Map<String, Object> jobj = request.send().getContentAsJSONObject();
-            
+            log.info("jobj : "+jobj)
             long exp = Long.parseLong(jobj.get("expires_in").toString()) * 1000;
             tokenExp = System.currentTimeMillis() + exp;
             token = jobj.get("access_token").toString();
