@@ -33,7 +33,8 @@ public class FidoEnroller extends CasaWSBase {
             HTTPResponse response = sendRequest(request, false, true);
             String responseContent = response.getContent();
             int status = response.getStatusCode();
-
+            log.info("Status of attestation :"+ status);
+            log.info("responseContent : "+ responseContent);
             if (status != 200) {
                 log.info("Attestation response was: ({}) {}", status, responseContent);
                 throw new Exception(response.getContentAsJSONObject().get("code").toString());
