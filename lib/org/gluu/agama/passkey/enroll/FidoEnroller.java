@@ -24,7 +24,9 @@ public class FidoEnroller extends CasaWSBase {
             HTTPRequest request = new HTTPRequest(HTTPRequest.Method.GET, new URL(getApiBase() + "/enrollment/fido2/attestation"));
 
             StringJoiner joiner = new StringJoiner("&");
-            Map.of("userid", id, "platformAuthn", "false").forEach((k, v) -> joiner.add(k + "=" + encode(v)));
+            // Map.of("userid", id, "platformAuthn", "false").forEach((k, v) -> joiner.add(k + "=" + encode(v)));
+            
+            Map.of("userid", id).forEach((k, v) -> joiner.add(k + "=" + encode(v)));
             request.setQuery(joiner.toString());
 
             log.info("Generating an attestation message for {}", id);
