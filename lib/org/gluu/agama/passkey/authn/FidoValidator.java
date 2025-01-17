@@ -41,7 +41,7 @@ public class FidoValidator {
         // Using assertionService as a private class field gives serialization trouble...
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
         String content;
-        AssertionOptions assertionRequest = AssertionOptions()
+        AssertionOptions assertionRequest = new AssertionOptions()
         if (uid == null) {
             content = JSONObject.toJSONString(Map.of("timeout", 90000));
         } else {
