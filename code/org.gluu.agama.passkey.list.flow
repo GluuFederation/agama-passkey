@@ -74,8 +74,8 @@ Repeat 10 times max
                obj.errorMessage = E.message
           When E is null
                // Ends the flow and returns the user's inum
-               it_ajzom = {success:true, data: { userId: inum }}
-               Finish it_ajzom
+               it_qeqor = {success:true, data: { userId: inum }}
+               Finish it_qeqor
 // End flow with error because it has exceeded the limit of attempts.
-it_idcde = {success:false, error: "Passkey registration attempt exceeded"}
-Finish it_idcde
+it_acdts = {success:false, error: "Passkey registration attempt exceeded"}
+Finish it_acdts
