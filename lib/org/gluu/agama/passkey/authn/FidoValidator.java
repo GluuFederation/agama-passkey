@@ -64,7 +64,7 @@ public class FidoValidator {
     }
 
     public String verify(String tokenResponse) throws IOException {
-        logger.info("Verifying fido token response");
+        logger.info("Verifying fido token response : "+tokenResponse);
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
 
         Response response = assertionService.verify(tokenResponse);
@@ -75,7 +75,7 @@ public class FidoValidator {
             if (jsonNode.has("error_description")) {
                 sb.append(String.format(", description: %s", jsonNode.getString("error_description")));
             }
-            logger.error(sb.toString());
+            logger.info(sb.toString());
             throw new IOException(sb.toString());
         }
 
