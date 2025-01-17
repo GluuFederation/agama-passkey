@@ -82,7 +82,7 @@ public class FidoValidator {
         String resString = response.readEntity(String.class);
         log.info("Response : "+resString)
         org.json.JSONObject jsonNode = new org.json.JSONObject(resString);
-        logger.error("Status: {}, Response: {}", status, jsonNode);
+        logger.info("Status: {}, Response: {}", status, jsonNode);
         if (jsonNode.has("username")) {
             String user = jsonNode.getString("username");
             logger.debug("User returned: {}", user);
