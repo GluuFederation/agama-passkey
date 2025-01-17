@@ -67,7 +67,7 @@ public class FidoValidator {
         logger.info("Verifying fido token response : "+tokenResponse);
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
         AssertionResult assertionResult = mapper.readValue(tokenResponse, AssertionResult.class);
-        Response response = assertionService.verify(tokenResponse);
+        Response response = assertionService.verify(assertionResult);
         int status = response.getStatus();
         if (status != Response.Status.OK.getStatusCode()) {
             org.json.JSONObject jsonNode = new org.json.JSONObject(response.readEntity(String.class));
