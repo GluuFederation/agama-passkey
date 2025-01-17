@@ -48,7 +48,7 @@ public class ScimWSBase {
             String authz = scimSetting.getScimClientId() + ":" + scimSetting.getScimClientSecret();
             String authzEncoded = new String(Base64.getEncoder().encode(authz.getBytes(UTF_8)), UTF_8);
             basicAuthnHeader = "Basic " + authzEncoded;
-            log.debug("Scim loaded successfully, basicAuthnHeader: {}, apiBase: {}", authz, apiBase);
+            log.info("Scim loaded successfully, basicAuthnHeader: {}, apiBase: {}", authz, apiBase);
         }
     }
 
@@ -66,7 +66,7 @@ public class ScimWSBase {
         if (withToken) {
             refreshToken();
             request.setAuthorization("Bearer " + token);
-            log.debug("--> Header Authorization: Bearer {}", token);
+            log.info("--> Header Authorization: Bearer {}", token);
         }
 
         HTTPResponse r = request.send();
@@ -83,7 +83,7 @@ public class ScimWSBase {
     private void ensureScimAvailability() throws IOException {
         try {
             URL url = new URL(serverBase + "/jans-scim/sys/health-check");
-            log.debug("Scim health-check url: {}", url);
+            log.info("Scim health-check url: {}", url);
             HTTPRequest request = new HTTPRequest(HTTPRequest.Method.GET, url);
             sendRequest(request, true, false);
         } catch (Exception e) {
@@ -103,10 +103,10 @@ public class ScimWSBase {
         setTimeouts(request);
         request.setQuery(joiner.toString());
         request.setAuthorization(basicAuthnHeader);
-
+        log.info("request : " +request.getURI().toURL().toString());
         try {
             Map<String, Object> jobj = request.send().getContentAsJSONObject();
-
+            log.info("jobj : "+jobj)
             long exp = Long.parseLong(jobj.get("expires_in").toString()) * 1000;
             tokenExp = System.currentTimeMillis() + exp;
             token = jobj.get("access_token").toString();
