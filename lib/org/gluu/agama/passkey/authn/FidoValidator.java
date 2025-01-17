@@ -4,20 +4,20 @@ import io.jans.fido2.client.AssertionService;
 import io.jans.fido2.client.Fido2ClientFactory;
 
 import io.jans.fido2.model.assertion.AssertionOptions;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.core.Response;
 import net.minidev.json.JSONObject;
 import org.gluu.agama.passkey.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import io.jans.fido2.model.assertion.AssertionResult;
 import java.io.IOException;
 import java.util.Map;
 
 public class FidoValidator {
 
     private static final Logger logger = LoggerFactory.getLogger(FidoValidator.class);
-
+    private static ObjectMapper mapper = new ObjectMapper();
     private final String metadataConfiguration;
 
     public FidoValidator() throws IOException {
@@ -66,7 +66,7 @@ public class FidoValidator {
     public String verify(String tokenResponse) throws IOException {
         logger.info("Verifying fido token response : "+tokenResponse);
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
-
+        AssertionResult assertionResult = mapper.readValue(token_response, AssertionResult.class);
         Response response = assertionService.verify(tokenResponse);
         int status = response.getStatus();
         if (status != Response.Status.OK.getStatusCode()) {
