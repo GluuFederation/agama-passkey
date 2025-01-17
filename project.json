@@ -3,7 +3,7 @@
     "description": "Agama Passkey",
     "type": "community",
     "author": "Milton-Ch",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "authorWebsite": "https://github.com/GluuFederation/agama-passkey",
     "githubUri": "https://github.com/GluuFederation/agama-passkey",
     "license": "apache-2.0",
