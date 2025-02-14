@@ -68,4 +68,4 @@ In the `Jans Fido2` dynamic configuration, set the `assertionOptionsGenerateEndp
 }
 ```
 
-Restart `Jans Fido2` server
+Restart `Jans Fido2` server.
