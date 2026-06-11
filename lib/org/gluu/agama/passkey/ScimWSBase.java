@@ -97,19 +97,30 @@ public class ScimWSBase {
 
         StringJoiner joiner = new StringJoiner("&");
         Map.of("grant_type", "client_credentials", "scope", scope)
-                .forEach((k, v) -> joiner.add(k + "=" + v));
+                .forEach((k, v) -> joiner.add(encode(k) + "=" + encode(v)));
 
         HTTPRequest request = new HTTPRequest(HTTPRequest.Method.POST, new URL(serverBase + "/jans-auth/restv1/token"));
         setTimeouts(request);
         request.setQuery(joiner.toString());
         request.setAuthorization(basicAuthnHeader);
-        log.info("request : " +request.getURI().toURL().toString());
+        log.info("request : " + request.getURI().toURL().toString());
         try {
-            Map<String, Object> jobj = request.send().getContentAsJSONObject();
-            log.info("jobj : "+jobj)
-            long exp = Long.parseLong(jobj.get("expires_in").toString()) * 1000;
+            HTTPResponse response = request.send();
+            if (response.getStatusCode() != 200) {
+                throw new IOException("Token endpoint returned status " + response.getStatusCode()
+                        + ": " + response.getBody());
+            }
+
+            Map<String, Object> jobj = response.getContentAsJSONObject();
+            Object accessToken = jobj.get("access_token");
+            Object expiresIn = jobj.get("expires_in");
+            if (accessToken == null || expiresIn == null) {
+                throw new IOException("Token response missing access_token/expires_in: " + jobj);
+            }
+
+            long exp = Long.parseLong(expiresIn.toString()) * 1000;
             tokenExp = System.currentTimeMillis() + exp;
-            token = jobj.get("access_token").toString();
+            token = accessToken.toString();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
+import io.jans.agama.engine.script.LogUtils;
 
 public class EnrollmentHelper extends CasaWSBase {
 
@@ -22,6 +23,7 @@ public class EnrollmentHelper extends CasaWSBase {
 
     public MFAUserInfo getMFAUserInfo(String personUid, Set<String> methods) throws IOException {
         try {
+            LogUtils.log("Get MFA User Info:  uid: % methods: %", personUid, methods);
             HTTPRequest request = new HTTPRequest(HTTPRequest.Method.GET, new URL(apiBase + "/v2/2fa/user-info/" + encode(personUid)));
             StringJoiner joiner = new StringJoiner("&");
             methods.forEach(m -> joiner.add("m=" + m));
@@ -34,8 +36,9 @@ public class EnrollmentHelper extends CasaWSBase {
             throw new IOException("Unable to determine the amount of enrolled credentials", e);
         }
     }
-
+  
     public MFAUserInfo getMFAUserInfoByFido2(String personUid) throws IOException {
+        LogUtils.log("GETMFAUSERINFOBYFIDO2 function has been called with uid: %", personUid);
         return getMFAUserInfo(personUid, Collections.singleton("fido2"));
     }
 }

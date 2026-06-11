@@ -6,8 +6,14 @@ import io.jans.as.model.exception.InvalidClaimException;
 import io.jans.service.cdi.util.CdiUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import io.jans.agama.engine.script.LogUtils;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
+
 
 public class IdentityProcessor {
 
@@ -19,10 +25,11 @@ public class IdentityProcessor {
     private static final String DISPLAY_NAME = "displayName";
     private static final String MAIL = "mail";
 
+
     public static Map<String, String> accountFromUid(String uid) throws InvalidClaimException {
         User user = getUser(UID, uid);
         boolean local = user != null;
-        log.debug("There is {} local account for {}", local ? "a" : "no", uid);
+        LogUtils.log("There is % local account for %", local ? "a" : "no", uid);
 
         if (local) {
             String inum = getSingleValuedAttr(user, INUM_ATTR);
@@ -55,4 +62,5 @@ public class IdentityProcessor {
         }
         return value == null ? null : value.toString();
     }
+
 }

@@ -55,12 +55,12 @@
 					"x": 300,
 					"y": 200
 				},
-				"previousNodeId": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753"
+				"previousNodeId": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba"
 			},
 			"type": "assignmentNode",
 			"id": "assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45",
 			"position": {
-				"x": 300,
+				"x": 550,
 				"y": 200
 			},
 			"measured": {
@@ -94,7 +94,7 @@
 			"type": "callNode",
 			"id": "callNode-cf473884-3cc9-416a-880d-28c2bff33fa6",
 			"position": {
-				"x": 550,
+				"x": 800,
 				"y": 200
 			},
 			"measured": {
@@ -128,7 +128,7 @@
 			"type": "assignmentNode",
 			"id": "assignmentNode-119144b0-fb4b-47b2-ae85-20a84b3c2654",
 			"position": {
-				"x": 800,
+				"x": 1050,
 				"y": 200
 			},
 			"measured": {
@@ -157,7 +157,7 @@
 			"type": "repeatNode",
 			"id": "repeatNode-cbab4e28-6134-45ad-8a0c-23504ae7d207",
 			"position": {
-				"x": 1050,
+				"x": 1300,
 				"y": 200
 			},
 			"measured": {
@@ -395,7 +395,7 @@
 						},
 						{
 							"variableTypeCheck": true,
-							"assignmentExpression": "Passkey registration failed.",
+							"assignmentExpression": "\"Passkey registration failed\"",
 							"assignedVariableName": "obj.errorTitle"
 						},
 						{
@@ -688,7 +688,7 @@
 						},
 						{
 							"variableTypeCheck": true,
-							"assignmentExpression": "Passkey registration failed.",
+							"assignmentExpression": "\"Passkey registration failed.\"",
 							"assignedVariableName": "obj.errorTitle"
 						},
 						{
@@ -754,6 +754,39 @@
 			}
 		},
 		{
+			"id": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+			"type": "logNode",
+			"position": {
+				"x": 300,
+				"y": 200
+			},
+			"data": {
+				"id": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+				"type": "logNode",
+				"position": {
+					"x": 300,
+					"y": 200
+				},
+				"previousNodeId": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753",
+				"agamaData": {
+					"logMessage": "\"Passkey add flow starting... \"",
+					"logLevel": "info",
+					"nodeIcon": "octicon:log-16",
+					"nodeColor": "",
+					"titleColor": "",
+					"descColor": "",
+					"displayName": "",
+					"hasComment": true,
+					"comment": ""
+				}
+			},
+			"measured": {
+				"width": 170,
+				"height": 124
+			},
+			"selected": true
+		},
+		{
 			"data": {
 				"agamaData": {
 					"nodeIcon": "material-symbols:line-end-square-rounded",
@@ -788,25 +821,6 @@
 		}
 	],
 	"edges": [
-		{
-			"id": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753-assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45",
-			"type": "default",
-			"source": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753",
-			"target": "assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45",
-			"labelBgPadding": [
-				8,
-				4
-			],
-			"labelBgBorderRadius": 4,
-			"label": "",
-			"labelBgStyle": {
-				"fill": "#009688",
-				"color": "#ffffff",
-				"fillOpacity": 0.7
-			},
-			"labelShowBg": true,
-			"sourceHandle": "source_startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753"
-		},
 		{
 			"id": "assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45-callNode-cf473884-3cc9-416a-880d-28c2bff33fa6",
 			"type": "default",
@@ -1186,11 +1200,49 @@
 			},
 			"labelShowBg": true,
 			"sourceHandle": "source_whenNode-61429ea8-7403-4912-945c-ffeecb3173a2_success"
+		},
+		{
+			"id": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753-logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+			"type": "default",
+			"source": "startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753",
+			"target": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+			"labelBgPadding": [
+				8,
+				4
+			],
+			"labelBgBorderRadius": 4,
+			"label": "",
+			"labelBgStyle": {
+				"fill": "#009688",
+				"color": "#ffffff",
+				"fillOpacity": 0.7
+			},
+			"labelShowBg": true,
+			"sourceHandle": "source_startNode-c4aa69a5-2ac1-4d79-b721-e46cc6f3e753"
+		},
+		{
+			"id": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba-assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45",
+			"type": "default",
+			"source": "logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+			"target": "assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45",
+			"label": "",
+			"labelBgPadding": [
+				8,
+				4
+			],
+			"labelBgBorderRadius": 4,
+			"labelBgStyle": {
+				"fill": "#009688",
+				"color": "#ffffff",
+				"fillOpacity": 0.7
+			},
+			"sourceHandle": "source_logNode-22d887f5-02fd-48a5-a6b2-4d32bca30eba",
+			"targetHandle": "target_assignmentNode-b0f19fc6-6046-4e11-bb5a-bbb84d363b45"
 		}
 	],
 	"viewport": {
-		"x": -30.680538417319212,
-		"y": -21.075005553636117,
-		"zoom": 0.5
+		"x": -75,
+		"y": -77,
+		"zoom": 1
 	}
 }

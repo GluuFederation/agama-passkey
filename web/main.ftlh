@@ -16,8 +16,16 @@
 </head>
 <body>
 <script>
-    function authenticationWithPasskey() {
-        const request = ${assertion?no_esc}
+    // Abort controller for conditional UI — cancelled when user clicks the manual button
+    let conditionalAbortController = null;
+
+    function authenticationWithPasskey(request, mediation) {
+        if (!request) {
+            request = ${assertion?no_esc};
+        }
+        if (mediation) {
+            request.mediation = mediation;
+        }
         console.log('Assertion request: ' + JSON.stringify(request));
         webauthn.getAssertion(request)
             .then(data => {
@@ -28,6 +36,8 @@
                 document.forms[0].submit();
             })
             .catch(err => {
+                // Abort errors from conditional UI are silent — user is just typing a password
+                if (err.name === "AbortError") return;
                 console.error('Failed to webauthn get credential: ', err);
                 if (err.name === "NotAllowedError") {
                     document.getElementById('errorMessage').value = 'The operation either timed out or was not allowed.';
@@ -41,10 +51,37 @@
             });
     }
 
+    async function startConditionalUI() {
+        if (!window.PublicKeyCredential ||
+            typeof PublicKeyCredential.isConditionalMediationAvailable !== 'function') {
+            return; // browser doesn't support it — fall back to button
+        }
+        const supported = await PublicKeyCredential.isConditionalMediationAvailable();
+        if (!supported) return;
+
+        // Fetch a fresh assertion request from the server (no username)
+        try {
+            const resp = await fetch('${webCtx.contextPath}/auth/fido2/assertion/options', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: '' })
+            });
+            if (!resp.ok) return;
+            const request = await resp.json();
+            conditionalAbortController = new AbortController();
+            request.signal = conditionalAbortController.signal;
+            authenticationWithPasskey(request, 'conditional');
+        } catch (e) {
+            console.log('Conditional UI setup failed (non-fatal):', e);
+        }
+    }
+
     window.addEventListener("load", (event) => {
         const isAssertion = ${isAssertion?c};
         if (isAssertion) {
-            authenticationWithPasskey();
+            authenticationWithPasskey(null, null);
+        } else {
+            startConditionalUI();
         }
     });
 </script>
@@ -69,7 +106,7 @@
                         </label>
                         <input type="text" name="username" id="username"
                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="" required="" autocomplete="off">
+                               placeholder="" required="" autocomplete="username webauthn">
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -133,6 +170,7 @@
                 </#if>
 
                 <button type="submit" name="loginWithPasskeyBtn" formnovalidate
+                        onclick="if(conditionalAbortController){conditionalAbortController.abort();conditionalAbortController=null;}"
                         class="w-full text-black bg-gray-50 border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     Sign in with a passkey
                 </button>

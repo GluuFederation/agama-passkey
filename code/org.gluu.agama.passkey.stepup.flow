@@ -1,0 +1,38 @@
+//   Requires passkey re-assertion for an already-authenticated user before a sensitive action.
+Flow org.gluu.agama.passkey.stepup
+     Basepath ""
+     Inputs uid
+//   Check that the user has at least one passkey enrolled
+passkeyCount = 0
+mfaInfo | E = Call org.gluu.agama.passkey.EnrollmentHelper#new 
+When E is null
+     mfaData | E2 = Call mfaInfo getMFAUserInfoByFido2 uid
+     When E2 is null
+          passkeyCount = mfaData.count
+When passkeyCount is 0
+     it_pynay = {success:false, error: "No passkeys enrolled"}
+     Finish it_pynay
+//   Build a scoped assertion request for this specific user
+fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+assertion | Ea = Call fidoValidator assertionRequest uid
+When Ea is not null
+     it_lrpei = {success:false, error: "Could not build assertion request."}
+     Finish it_lrpei
+//   Show step-up screen — allow up to 3 attempts
+obj = { assertion: assertion, showError: false, errorMessage: "" }
+Repeat 3 times max
+     stepUpForm = RRF "passkey-step-up.ftlh" obj
+     When stepUpForm.tokenResponse is not ""
+          verifyResponse | Ev = Call fidoValidator verify stepUpForm.tokenResponse
+          When Ev is not null
+               obj.showError = true
+               obj.errorMessage = Ev.message
+          When Ev is null
+               it_jkeuw = {success:true, data: { userId: uid }}
+               Finish it_jkeuw
+     When stepUpForm.skipped is "skipped"
+          obj.showError = true
+          obj.errorMessage = stepUpForm.errorMessage
+//   Exceeded max attempts
+it_gihlb = {success:false, error: "Step-up failed"}
+Finish it_gihlb

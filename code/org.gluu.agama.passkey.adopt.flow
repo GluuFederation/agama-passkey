@@ -1,0 +1,58 @@
+//  Shows a nudge screen if the user has no passkeys and has not recently snoozed.
+Flow org.gluu.agama.passkey.adopt
+     Basepath ""
+     Inputs userData conf
+//  Extract uid and inum from userData
+uid = userData.uid
+snoozeDays = conf.snoozeDays
+//  Read snoozeDays from conf, default to 7
+When snoozeDays is null
+     snoozeDays = 7
+// Adoption flow
+Log "@info PassKey adopt Flow starting..."
+// Check rollout config — skip nudge entirely if nudgeEnabled is false
+rolloutConfig | Ecfg = Call org.gluu.agama.passkey.PasskeyRolloutConfig#new 
+cfgMap | Ecfg2 = Call rolloutConfig getConfig 
+When Ecfg2 is null
+     nudgeEnabled = cfgMap.nudgeEnabled
+     When nudgeEnabled is false
+          it_qevra = {success:true, data: { userId: uid}}
+          Finish it_qevra
+// Check how many passkeys the user has enrolled
+passkeyCount = 0
+//  Check how many passkeys the user has enrolled.
+mfaInfo | E = Call org.gluu.agama.passkey.ScimFido2Helper#new conf
+When E is null
+     mfaData | E2 = Call mfaInfo getFidoDeviceByUser userData.inum
+     When E2 is null
+          passkeyCount = mfaData.count
+//  If user already has passkeys, skip nudge entirely
+When passkeyCount is not 0
+     it_clfgv = {success:true, data: { userId: uid }}
+     Finish it_clfgv
+//  Check if user has an active snooze
+snoozed = Call org.gluu.agama.passkey.NudgeHelper#checkSnoozed uid snoozeDays
+When snoozed is true
+     it_mcmnq = {success:true, data: { userId: uid }}
+     Finish it_mcmnq
+// Log nudge shown event
+Call org.gluu.agama.passkey.PasskeyEventLogger#log "PASSKEY_NUDGE_SHOWN" uid null
+//  Show the nudge screen
+nudgeForm = RRF "passkey-nudge.ftlh" 
+When nudgeForm.addPasskeyNowBtn is ""
+     // Log nudge accepted
+     Call org.gluu.agama.passkey.PasskeyEventLogger#log "PASSKEY_NUDGE_ACCEPTED" uid null
+     //  User wants to add a passkey — trigger the add flow
+     addTrigger = Trigger org.gluu.agama.passkey.add userData
+     it_hfipl = {success:true, data: { userId: uid }}
+     Finish it_hfipl
+When nudgeForm.remindLaterBtn is ""
+     // Log nudge dismissed
+     Call org.gluu.agama.passkey.PasskeyEventLogger#log "PASSKEY_NUDGE_DISMISSED" uid null
+     //  User wants to be reminded later — record snooze and continue
+     Call org.gluu.agama.passkey.NudgeHelper#snooze uid snoozeDays
+     it_upsly = {success:true, data: { userId: uid }}
+     Finish it_upsly
+//  Fallback finish (should not be reached)
+it_kraoo = {success:true, data: { userId: uid }}
+Finish it_kraoo

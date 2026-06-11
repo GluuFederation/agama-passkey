@@ -7,10 +7,12 @@
 
 # About Agama Passkey
 
-This repo is home to the Gluu Agama-passkey project. Use this project to add 
-user authentication with **Passkey**(passwordless authentication that uses 
-a device to verify a user's identity before allowing them to access an account)
-2-factor authentication.
+This repo is home to the Gluu Agama-passkey project. Use this project to add
+passwordless authentication using **Passkeys** — a phishing-resistant credential
+that uses your device (biometrics, PIN, or security key) to verify your identity.
+
+The project covers the full passkey adoption lifecycle: enrollment, passwordless
+login, post-login nudging, and account recovery.
 
 ## Where To Deploy
 
@@ -35,10 +37,7 @@ Deployment of an Agama project involves three steps.
 
 #### Pre-Requisites
 
-* Register a client to integrate with SCIM (used to list passkeys and edit), minimum scopes:
-- https://jans.io/scim/fido2.read
-- https://jans.io/scim/fido2.write
-
+* To recover a passkey, we use [agama-smtp](https://github.com/GluuFederation/agama-smtp), which sends email messages. Please ensure that the Jans Auth Server has the [SMTP service](https://docs.jans.io/head/janssen-server/config-guide/smtp-configuration/) configured.
 
 ### Download The Project
 
@@ -47,17 +46,17 @@ Deployment of an Agama project involves three steps.
 > configure this project. The TUI tool enables the download and adding of this
 > project directly from the tool, as part of the `community projects` listing.
 
-The project is bundled as 
-[.gama package](https://docs.jans.io/head/agama/gama-format/). 
-Visit the `Assets` section of the 
-[Releases](https://github.com/GluuFederation/agama-passkey/releases) to download 
+The project is bundled as
+[.gama package](https://docs.jans.io/head/agama/gama-format/).
+Visit the `Assets` section of the
+[Releases](https://github.com/GluuFederation/agama-passkey/releases) to download
 the `.gama` package.
 
 
 ### Add The Project To The Server
 
-The Janssen Server provides multiple ways an Agama project can be 
-deployed and configured. Either use the command-line tool, REST API, or a 
+The Janssen Server provides multiple ways an Agama project can be
+deployed and configured. Either use the command-line tool, REST API, or a
 TUI (text-based UI). Refer to the [Agama project configuration page](https://docs.jans.io/head/admin/config-guide/auth-server-config/agama-project-configuration/) in the Janssen Server documentation for more details.
 
 ### Configure The Project
@@ -72,7 +71,7 @@ Sample JSON:
 
 ``` json
 {
-    "org.gluu.agama.passkey.main": {
+    "org.gluu.agama.passkey.first": {
         "scimClientId": "PUT_YOUR_SCIM_CLIENT_ID_HERE",
         "scimClientSecret": "PUT_YOUR_SCIM_CLIENT_SECRET"
     }
@@ -80,30 +79,28 @@ Sample JSON:
 ```
 
 
-
 ### Test The Flow
 
-Use any relying party implementation (like [jans-tarp](https://github.com/JanssenProject/jans/tree/main/demos/jans-tarp)) 
+Use any relying party implementation (like [jans-tarp](https://github.com/JanssenProject/jans/tree/main/demos/jans-tarp))
 to send an authentication request that triggers the flow.
 
-From the incoming authentication request, the Janssen Server reads the `ACR` 
+From the incoming authentication request, the Janssen Server reads the `ACR`
 parameter value to identify which authentication method should be used.
-To invoke the `org.gluu.agama.passkey.main` flow contained in the Agama-passkey 
-project, specify the ACR value as `agama_<qualified-name-of-the-top-level-flow>`, 
-i.e `agama_org.gluu.agama.passkey.main`.
+To invoke the `org.gluu.agama.passkey.first` flow contained in the Agama-passkey
+project, specify the ACR value as `agama_<qualified-name-of-the-top-level-flow>`,
+i.e `agama_org.gluu.agama.passkey.first`.
 
 ## Customize and Make It Your Own
 
 Fork this repo to start customizing the Agama-passkey project. It is possible to
 customize the user interface provided by the flow to suit your organisation's
-branding
-guidelines. Or customize the overall flow behavior. Follow the best
+branding guidelines. Or customize the overall flow behavior. Follow the best
 practices and steps listed
 [here](https://docs.jans.io/head/admin/developer/agama/agama-best-practices/#project-reuse-and-customizations)
 to achieve these customizations in the best possible way.
 This project can be reused in other Agama projects to create more complex
-authentication journeys.  To reuse, trigger the
-[org.gluu.agama.passkey.main](#flows-in-the-project) flow from other Agama projects.
+authentication journeys. To reuse, trigger the
+[org.gluu.agama.passkey.first](#flows-in-the-project) flow from other Agama projects.
 
 To make it easier to visualise and customize the Agama Project, use
 [Agama Lab](https://cloud.gluu.org/agama-lab/login).
@@ -112,11 +109,12 @@ To make it easier to visualise and customize the Agama Project, use
 ## Flows In The Project
 
 | Qualified Name | Description |
-|-----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `org.gluu.agama.passkey.main` | This is the main flow, which you can directly launch from the browser. If you have not configured a passkey, you must first log in with your credentials and register your passkey(s) at `org.gluu.agama.passkey.list`. If you have at least 1 passkey configured, then you can click the "Login with passkey" button. |
-| `org.gluu.agama.passkey.list` | This flow is used to list the passkeys that the logged-in user has registered. If you do not have a passkey, an option to add a new passkey, `org.gluu.agama.passkey.add` is enabled. If you already have at least one passkey, you can click `Login with passkey`. |
-| `org.gluu.agama.passkey.add` | This flow is used to register a new passkey. The user has to validate his FIDO device, which can be a (Yubico key, device fingerprint, Windows Hello, Apple Face ID, etc.). |
-| `org.gluu.agama.passkey.nickname` | This flow is used to add a nickname to the newly registered passkey. Once completed, this stream returns to the `org.gluu.agama.passkey.list`
+|---|---|
+| `org.gluu.agama.passkey.first` | Passkey-first / passwordless login. Presents an identifier-first screen with Conditional UI (`autocomplete="username webauthn"`) so the browser can offer a passkey automatically. Falls back to password if no passkey is available, then triggers the adoption nudge. |
+| `org.gluu.agama.passkey.adopt` | Post-login passkey nudge. After a successful password login, checks if the user has no passkeys enrolled and prompts them to add one. Supports a configurable snooze period so users can defer enrollment. |
+| `org.gluu.agama.passkey.add` | Registers a new passkey. The user verifies their FIDO device (security key, fingerprint, Windows Hello, Apple Face ID, etc.). |
+| `org.gluu.agama.passkey.nickname` | Assigns a nickname to a newly registered passkey. Nickname is optional — defaults to the device type if left blank. Returns to `org.gluu.agama.passkey.list` on completion. |
+| `org.gluu.agama.passkey.recovery` | Account recovery flow. Delegates identity verification to `org.gluu.agama.smtp.main`, then uses the verified user ID to look up the account and trigger passkey re-enrollment. Requires the `agama-smtp` project to be deployed alongside this one. |
 
 
 
@@ -131,13 +129,6 @@ series for a quick demo on this flow.
 While the video shows how the flow works overall, it may be dated. Do check the
 [Test The Flow](#test-the-flow) section to understand the current
 method of passing the ACR parameter when invoking the flow.
-
-
-* Login with credentials and configure your first passkey device, and as a last step, complete the login with your new configured key.
-![TEST_USE_CASE_1](https://github.com/GluuFederation/agama-passkey/assets/86965029/0e5cc346-a576-499a-a9e3-6069d6932a4b)
-
-* Log in without credentials; use the `Login with passkey` button.
-![TEST_USE_CASE_2](https://github.com/GluuFederation/agama-passkey/assets/86965029/200328ec-888a-4767-8242-1c50a126a979)
 
 
 <!-- This is the stats url reference for this repository -->

@@ -20,7 +20,16 @@
         "org.gluu.agama.passkey.add": {},
         "org.gluu.agama.passkey.nickname": {},
         "org.gluu.agama.passkey.list": {},
-        "org.gluu.agama.passkey.main": {}
+        "org.gluu.agama.passkey.main": {},
+        "org.gluu.agama.passkey.adopt": {},
+        "code": {},
+        "org.gluu.agama.passkey.first": {
+            "scimClientId": "PUT_YOUR_SCIM_CLIENT_ID_HERE",
+            "scimClientSecret": "PUT_YOUR_SCIM_CLIENT_SECRET",
+            "snoozeDays": 7
+        },
+        "org.gluu.agama.passkey.recovery": {},
+        "org.gluu.agama.passkey.stepup": {}
     },
     "name": "agama-passkey"
 }

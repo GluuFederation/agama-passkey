@@ -6,13 +6,12 @@ import io.jans.fido2.client.Fido2ClientFactory;
 import io.jans.fido2.model.assertion.AssertionOptions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.core.Response;
-import net.minidev.json.JSONObject;
 import org.gluu.agama.passkey.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.jans.fido2.model.assertion.AssertionResult;
 import java.io.IOException;
-import java.util.Map;
+import io.jans.agama.engine.script.LogUtils;
 
 public class FidoValidator {
 
@@ -21,7 +20,7 @@ public class FidoValidator {
     private final String metadataConfiguration;
 
     public FidoValidator() throws IOException {
-        logger.info("Inspecting fido2 configuration discovery URL");
+        LogUtils.log("Inspecting fido2 configuration discovery URL");
         String metadataUri = NetworkUtils.urlBeforeContextPath() + "/.well-known/fido2-configuration";
 
         try (Response response = Fido2ClientFactory.instance().createMetaDataConfigurationService(metadataUri).getMetadataConfiguration()) {
@@ -30,33 +29,27 @@ public class FidoValidator {
 
             if (status != Response.Status.OK.getStatusCode()) {
                 String msg = "Problem retrieving fido metadata (code: " + status + ")";
-                logger.error(msg + "; response was: " + metadataConfiguration);
+                LogUtils.log(msg + "; response was: %", metadataConfiguration);
                 throw new IOException(msg);
             }
         }
     }
 
     public String assertionRequest(String uid) throws IOException {
-        logger.info("Building an assertion request for {}", uid);
         // Using assertionService as a private class field gives serialization trouble...
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
-        String content;
-        AssertionOptions assertionRequest = new AssertionOptions()
-        if (uid == null) {
-            content = JSONObject.toJSONString(Map.of("timeout", 90000));
-        } else {
-            content = JSONObject.toJSONString(Map.of("timeout", 90000, "username", uid));
+        AssertionOptions assertionRequest = new AssertionOptions();
+        if (uid != null) {
             assertionRequest.setUsername(uid);
         }
-        
-        
-        try (Response response = ( assertionService.authenticate(assertionRequest))) {
-            content = response.readEntity(String.class);
+
+        try (Response response = assertionService.authenticate(assertionRequest)) {
+            String content = response.readEntity(String.class);
             int status = response.getStatus();
 
             if (status != Response.Status.OK.getStatusCode()) {
                 String msg = "Assertion request building failed (code: " + status + ")";
-                logger.error(msg + "; response was: " + content);
+                LogUtils.log(msg + "; response was: %", content);
                 throw new IOException(msg);
             }
             return content;
@@ -64,7 +57,6 @@ public class FidoValidator {
     }
 
     public String verify(String tokenResponse) throws IOException {
-        logger.info("Verifying fido token response : "+tokenResponse);
         AssertionService assertionService = Fido2ClientFactory.instance().createAssertionService(metadataConfiguration);
         AssertionResult assertionResult = mapper.readValue(tokenResponse, AssertionResult.class);
         Response response = assertionService.verify(assertionResult);
@@ -75,17 +67,17 @@ public class FidoValidator {
             if (jsonNode.has("error_description")) {
                 sb.append(String.format(", description: %s", jsonNode.getString("error_description")));
             }
-            logger.info(sb.toString());
+            LogUtils.log(sb.toString());
             throw new IOException(sb.toString());
         }
 
         String resString = response.readEntity(String.class);
-        logger.info("Response : "+resString)
+        LogUtils.log("Response : %",resString);
         org.json.JSONObject jsonNode = new org.json.JSONObject(resString);
-        logger.info("Status: {}, Response: {}", status, jsonNode);
+        LogUtils.log("Status: %, Response: %", status, jsonNode);
         if (jsonNode.has("username")) {
             String user = jsonNode.getString("username");
-            logger.debug("User returned: {}", user);
+            LogUtils.log("User returned: %", user);
             return user;
         }
         return "";

@@ -1,0 +1,75 @@
+//  After successful password login with no passkeys, triggers the nudge flow.
+Flow org.gluu.agama.passkey.first
+     Basepath ""
+     Configs conf
+//  Get AuthenticationService and CdiUtil for password auth
+authService = Call io.jans.as.server.service.AuthenticationService#class
+cdiUtil = Call io.jans.service.cdi.util.CdiUtil#bean authService
+//  Get FidoValidator for passkey assertion
+fidoValidator = Call org.gluu.agama.passkey.authn.FidoValidator#new 
+//  Build an assertion request with no username (for conditional UI)
+assertion = Call fidoValidator assertionRequest null
+//  State for the identifier-first screen
+obj = { assertion: assertion, showError: false, errorTitle: "", errorMessage: "" }
+currentUsername = " "
+//  Track the username across screens
+Repeat 5 times max
+     //  --- Identifier-first screen ---
+     firstForm = RRF "passkey-first.ftlh" obj
+     //  Case 1: Conditional UI resolved — tokenResponse came back with the form
+     When firstForm.tokenResponse is not ""
+          verifyResponse | E = Call fidoValidator verify firstForm.tokenResponse
+          When E is not null
+               obj.showError = true
+               obj.errorTitle = "Passkey sign-in failed"
+               obj.errorMessage = E.message
+          When E is null
+               it_jqtvq = {success:true, data: { userId: verifyResponse }}
+               Finish it_jqtvq
+     //  Case 2: User clicked Continue with a username — go to password screen
+     When firstForm.continueBtn is ""
+          currentUsername = firstForm.username
+          pwdObj = { username: currentUsername, showError: false, errorTitle: "", errorMessage: "" }
+          Repeat 3 times max
+               pwdForm = RRF "passkey-first-password.ftlh" pwdObj
+               When pwdForm.backBtn is ""
+                    //  User wants to change username — break inner loop, re-show identifier screen
+                    obj.showError = false
+               When pwdForm.loginBtn is ""
+                    authOk = Call cdiUtil authenticate currentUsername pwdForm.password
+                    When authOk is true
+                         //  Password auth succeeded — check passkey count
+                         userData = Call org.gluu.agama.passkey.IdentityProcessor#accountFromUid currentUsername
+                         passkeyCount = 0
+                         mfaHelper | E3 = Call org.gluu.agama.passkey.ScimFido2Helper#new conf
+                         When E3 is null
+                              Log "@info Call Enrollment helper function"
+                              mfaData | E4 = Call mfaHelper getFidoDeviceByUser userData.inum
+                              Log "@info MFADATA is : % and error : %" mfaData E4
+                              When E4 is null
+                                   passkeyCount = mfaData.count
+                         When passkeyCount is 0
+                              //  No passkeys — trigger nudge
+                              adoptConf = conf
+                              When adoptConf.snoozeDays is ""
+                                   adoptConf.snoozeDays = 7
+                              trigger = Trigger org.gluu.agama.passkey.adopt userData adoptConf
+                         it_odkbt = {success:true, data: { userId: currentUsername }}
+                         Finish it_odkbt
+                    When authOk is false
+                         pwdObj.showError = true
+                         pwdObj.errorTitle = "Sign-in failed"
+                         pwdObj.errorMessage = "Incorrect password. Please try again"
+     When firstForm.lostpasskey is "lost"
+          // Trigger recovery flow
+          recoveryResult | Er = Trigger org.gluu.agama.passkey.recovery 
+          When recoveryResult.success is true
+               it_kuriy = {success:true, data: { userId: recoveryResult.data.userId}}
+               Finish it_kuriy
+          Otherwise
+               obj.showError = true
+               obj.errorTitle = "Passkey recovery failed"
+               obj.errorMessage = Er.message
+//  Exceeded max attempts
+it_vusgc = {success:false, error: "Login attempt exceeded"}
+Finish it_vusgc

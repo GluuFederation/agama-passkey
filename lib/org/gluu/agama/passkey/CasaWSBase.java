@@ -9,6 +9,7 @@ import io.jans.orm.PersistenceEntryManager;
 import io.jans.service.cdi.util.CdiUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import io.jans.agama.engine.script.LogUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,7 @@ public class CasaWSBase {
             PersistenceEntryManager entryManager = CdiUtil.bean(PersistenceEntryManager.class);
             clSettings = entryManager.find(ApplicationConfiguration.class, "ou=casa,ou=configuration,o=jans").getSettings().getOidcSettings().getClient();
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LogUtils.log(e.getMessage(), e);
             throw new IOException("Unable to retrieve Casa configuration. Is Casa installed?");
         }
 
@@ -72,16 +73,19 @@ public class CasaWSBase {
 
     protected HTTPResponse sendRequest(HTTPRequest request, boolean checkOK, boolean withToken)
             throws IOException, ParseException {
+        LogUtils.log("Send Request Function...");        
         setTimeouts(request);
         if (withToken) {
             refreshToken();
             request.setAuthorization("Bearer " + token);
         }
-
+        LogUtils.log("Send Request Function... request is : %", request); 
         HTTPResponse r = request.send();
+        // LogUtils.log("Send Request Function... r is : %", r.getContentAsJSONObject()); 
         if (checkOK) {
             r.ensureStatusCode(200);
         }
+        LogUtils.log("Send Request Function... r is : %", r); 
         return r;
     }
 
@@ -95,12 +99,13 @@ public class CasaWSBase {
                     new URL(serverBase + "/jans-casa/health-check"));
             sendRequest(request, true, false);
         } catch (Exception e) {
-            log.warn("Casa not installed or not running?");
+            LogUtils.log("Casa not installed or not running?");
             throw new IOException("Casa health-check request did not succeed", e);
         }
     }
 
     private void refreshToken() throws IOException {
+        LogUtils.log("RefreshToken Function...");
         if (System.currentTimeMillis() < tokenExp - TOKEN_EXP_GAP) return;
 
         StringJoiner joiner = new StringJoiner("&");
@@ -126,5 +131,6 @@ public class CasaWSBase {
     private void setTimeouts(HTTPRequest request) {
         request.setConnectTimeout(3500);
         request.setReadTimeout(3500);
+        LogUtils.log("Set Timouts Function... %", request);
     }
 }

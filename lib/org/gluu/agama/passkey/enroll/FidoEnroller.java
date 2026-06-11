@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.StringJoiner;
+import io.jans.agama.engine.script.LogUtils;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
@@ -29,19 +30,19 @@ public class FidoEnroller extends CasaWSBase {
             Map.of("userid", id).forEach((k, v) -> joiner.add(k + "=" + encode(v)));
             request.setQuery(joiner.toString());
 
-            log.info("Generating an attestation message for {}", id);
             HTTPResponse response = sendRequest(request, false, true);
             String responseContent = response.getContent();
             int status = response.getStatusCode();
-            log.info("Status of attestation :"+ status);
-            log.info("responseContent : "+ responseContent);
+            LogUtils.log("Status of attestation : %", status);
+            LogUtils.log("responseContent : %", responseContent);
             if (status != 200) {
-                log.info("Attestation response was: ({}) {}", status, responseContent);
+                LogUtils.log("Attestation response was: (%) %", status, responseContent);
                 throw new Exception(response.getContentAsJSONObject().get("code").toString());
             }
             return responseContent;
 
         } catch (Exception e) {
+            LogUtils.log("Failed to build an attestation message %", e);
             throw new IOException("Failed to build an attestation message", e);
         }
     }
@@ -52,19 +53,20 @@ public class FidoEnroller extends CasaWSBase {
                     new URL(getApiBase() + "/enrollment/fido2/registration/" + encode(id)));
             request.setQuery(tokenResponse);
 
-            log.info("Verifying registration : "+id +":"+ tokenResponse);
+            LogUtils.log("Verifying registration : % : %",id, tokenResponse);
             HTTPResponse response = sendRequest(request, false, true);
             int status = response.getStatusCode();
-            log.info("Status : "+status)
+            LogUtils.log("Status : %",status);
             Map<String, Object> map = response.getContentAsJSONObject();
-            log.info("Map: "+map)
+            LogUtils.log("Map: %",map);
             if (status != 201) {
-                log.error("Verification response was: ({}) {}", status, response.getContent());
+                LogUtils.log("Verification response was: (%) %", status, response.getContent());
                 throw new Exception(map.get("code").toString());
             }
             return map.get("id").toString();
 
         } catch (Exception e) {
+            LogUtils.log("Failed to verify fido registration %", e);
             throw new IOException("Failed to verify fido registration", e);
         }
     }
@@ -83,9 +85,10 @@ public class FidoEnroller extends CasaWSBase {
             HTTPResponse response = sendRequest(request, false, true);
             int status = response.getStatusCode();
 
-            log.info("Response was ({}): {}", status, response.getContent());
+            LogUtils.log("Response was (%): %", status, response.getContent());
             return status == 200;
         } catch (Exception e) {
+            LogUtils.log("Failed to name fido credential %", e);
             throw new IOException("Failed to name fido credential", e);
         }
     }

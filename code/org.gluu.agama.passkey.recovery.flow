@@ -1,0 +1,29 @@
+Flow org.gluu.agama.passkey.recovery
+     Basepath ""
+// Recovery flow has been called
+Log "@info Recovery flow has been called..."
+startObj = { username: "", showError: false, errorMessage: "" }
+// Max tries
+Repeat 3 times max
+     // Call agama-smtp flow.
+     smtpResult | Esr = Trigger org.gluu.agama.smtp.main 
+     Log "@info SMTP result %" smtpResult
+     When Esr is not null
+          // SMTP flow getting error
+          Log "@info SMTP flow getting error"
+          // Error in recovery
+          it_faepe = {success:false, error: "Getting error while recovering."}
+          Finish it_faepe
+     userId = smtpResult.data.userId
+     userData | Eu = Call org.gluu.agama.passkey.IdentityProcessor#accountFromUid userId
+     When Eu is not null
+          // Getting error in identity processo
+          Log "@info Getting error in identity processor: %" Eu
+     // Trigger passkey enrollment
+     addResult = Trigger org.gluu.agama.passkey.add userData
+     // Flow finish
+     it_dcgcg = {success:true, data: { userId: userId}}
+     Finish it_dcgcg
+// Exceeded max attempts
+it_wvwek = {success:false, error: "Recovery attempt exceeded"}
+Finish it_wvwek
